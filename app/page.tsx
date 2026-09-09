@@ -3,6 +3,7 @@ import charactersJson from "@/data/characters.json";
 import type { Character } from "@/lib/types";
 import { PLANS } from "@/lib/plans";
 import CharacterAvatar from "@/components/CharacterAvatar";
+import Reveal from "@/components/Reveal";
 
 const examples: { id: string; score: number }[] = [
   { id: "abiba-conseillere-abomey", score: 94 },
@@ -37,63 +38,73 @@ export default function Landing() {
 
   return (
     <main className="px-5 pb-28 pt-14 md:pb-10">
-      <section className="mx-auto max-w-xl text-center">
-        <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-medium text-gold2">
-          100 % ludique · aucun compte requis
-        </span>
-        <h1 className="mt-5 font-display text-4xl font-bold leading-tight md:text-5xl">
-          Et si tu avais <em className="text-gold2">déjà vécu</em> ?
-        </h1>
-        <p className="mt-4 text-sand/80">
-          Réponds à 6 questions et découvre qui tu étais dans une vie antérieure : nom, époque,
-          lieu et ton histoire complète.
-        </p>
-        <div className="mt-7 hidden md:block">
-          <Cta />
-        </div>
-        <p className="mt-3 text-xs text-sand/50">
-          {`Aperçu gratuit · moins de 2 minutes · dès ${PLANS.standard.price} FCFA pour la fiche complète`}
-        </p>
-      </section>
+      <Reveal>
+        <section className="mx-auto max-w-xl text-center">
+          <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-medium text-gold2">
+            100 % ludique · aucun compte requis
+          </span>
+          <h1 className="mt-5 font-display text-4xl font-bold leading-tight md:text-5xl">
+            Et si tu avais <em className="text-gold2">déjà vécu</em> ?
+          </h1>
+          <p className="mt-4 text-sand/80">
+            Réponds à 6 questions et découvre qui tu étais dans une vie antérieure : nom, époque,
+            lieu et ton histoire complète.
+          </p>
+          <div className="mt-7 hidden md:block">
+            <Cta />
+          </div>
+          <p className="mt-3 text-xs text-sand/50">
+            {`Aperçu gratuit · moins de 2 minutes · dès ${PLANS.standard.price} FCFA pour la fiche complète`}
+          </p>
+        </section>
+      </Reveal>
 
       <section className="mx-auto mt-14 max-w-3xl">
-        <h2 className="text-center font-display text-xl font-semibold text-gold2">
-          Ils ont déjà vécu
-        </h2>
+        <Reveal>
+          <h2 className="text-center font-display text-xl font-semibold text-gold2">
+            Ils ont déjà vécu
+          </h2>
+        </Reveal>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
-          {cards.map((c) => (
-            <article key={c.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div className="flex items-center gap-3">
-                <CharacterAvatar character={c} size={56} />
-                <div className="min-w-0">
-                  <h3 className="truncate font-semibold leading-tight">
-                    {c.name.split(",")[0]}
-                  </h3>
-                  <p className="text-xs text-sand/60">{c.era}</p>
+          {cards.map((c, i) => (
+            <Reveal key={c.id} delay={i * 120}>
+              <article className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-transform duration-300 hover:-translate-y-1">
+                <div className="flex items-center gap-3">
+                  <CharacterAvatar character={c} size={56} />
+                  <div className="min-w-0">
+                    <h3 className="truncate font-semibold leading-tight">
+                      {c.name.split(",")[0]}
+                    </h3>
+                    <p className="text-xs text-sand/60">{c.era}</p>
+                  </div>
                 </div>
-              </div>
-              <p className="mt-3 text-sm italic text-sand/80">« {c.hook} »</p>
-              <p className="mt-3 text-xs font-semibold text-gold2">
-                {c.score} % de compatibilité
-              </p>
-            </article>
+                <p className="mt-3 text-sm italic text-sand/80">« {c.hook} »</p>
+                <p className="mt-3 text-xs font-semibold text-gold2">
+                  {c.score} % de compatibilité
+                </p>
+              </article>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="mx-auto mt-14 max-w-xl">
-        <h2 className="text-center font-display text-xl font-semibold">Comment ça marche</h2>
+        <Reveal>
+          <h2 className="text-center font-display text-xl font-semibold">Comment ça marche</h2>
+        </Reveal>
         <ol className="mt-5 space-y-4">
           {steps.map((s, i) => (
-            <li key={s.title} className="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-              <span className="text-2xl">{s.emoji}</span>
-              <div>
-                <p className="font-semibold">
-                  {i + 1}. {s.title}
-                </p>
-                <p className="mt-1 text-sm text-sand/70">{s.text}</p>
-              </div>
-            </li>
+            <Reveal key={s.title} delay={i * 120}>
+              <li className="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <span className="text-2xl">{s.emoji}</span>
+                <div>
+                  <p className="font-semibold">
+                    {i + 1}. {s.title}
+                  </p>
+                  <p className="mt-1 text-sm text-sand/70">{s.text}</p>
+                </div>
+              </li>
+            </Reveal>
           ))}
         </ol>
       </section>
