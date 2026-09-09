@@ -41,7 +41,8 @@ export default function PlanChooser({
               />
             </div>
             <p className="mt-2 text-center text-[11px] text-sand/50">
-              MTN MoMo, Moov Money — redirection automatique vers ta révélation après paiement
+              MTN MoMo, Moov Money — ta fiche s&apos;ouvre automatiquement dès que le paiement
+              est confirmé
             </p>
           </div>
         );

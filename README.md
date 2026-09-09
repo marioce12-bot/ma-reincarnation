@@ -44,9 +44,9 @@ L'intégration repose sur des **liens Saspay** générés une fois pour chaque p
 2. Il paie sur le lien Saspay → après paiement, Saspay le renvoie vers l'URL de retour.
 3. La page de retour lit la référence (cookie), confirme le paiement en base et redirige automatiquement vers la révélation débloquée, avec un bouton de partage.
 
-**Important** : dans le dashboard Saspay, configure l'**URL de retour** de chacun des 3 liens vers `https://TON-DOMAIN/paiement/succes`. Sans cette configuration, la redirection automatique ne peut pas fonctionner.
+**Flux automatique sans URL de retour** : au clic sur « Payer », Saspay s'ouvre dans un nouvel onglet et l'onglet du site sonde `/api/paiement/etat` toutes les 4 s — dès que le webhook confirme le paiement, la fiche s'ouvre automatiquement. Si Saspay propose une **URL de retour**, configure-la vers `https://TON-DOMAIN/paiement/succes` en bonus (redirection immédiate).
 
-### Webhook Saspay (recommandé)
+### Webhook Saspay (indispensable au flux automatique)
 
 Si Saspay propose un champ **Webhook / IPN**, indique : `https://TON-DOMAIN/api/paiement/webhook`.
 
