@@ -83,14 +83,32 @@ function memoryStore(): Store {
 
 function supabaseStore(client: SupabaseClient): Store {
   const listCharacters = async (): Promise<Character[]> => {
-    const { data, error } = await client.from("characters").select("*").order("name");
-    if (error) throw new Error(error.message);
-    return (data ?? []) as unknown as Character[];
+    try {
+      const { data, error } = await client.from("characters").select("*").order("name");
+      if (error) throw new Error(error.message);
+      if (!data || data.length === 0) {
+        // Table Supabase pas encore seedée (node scripts/seed.mjs) : on retombe sur le
+        // jeu de personnages embarqué plutôt que de bloquer le quiz de l'utilisateur.
+        console.error("[store] Table 'characters' vide dans Supabase — fallback sur data/characters.json");
+        return characters;
+      }
+      return data as unknown as Character[];
+    } catch (err) {
+      console.error("[store] Échec de lecture Supabase (characters) — fallback sur data/characters.json:", err);
+      return characters;
+    }
   };
 
   const getCharacter = async (id: string): Promise<Character | null> => {
-    const { data } = await client.from("characters").select("*").eq("id", id).maybeSingle();
-    return (data as unknown as Character) ?? null;
+    try {
+      const { data } = await client.from("characters").select("*").eq("id", id).maybeSingle();
+      if (data) return data as unknown as Character;
+    } catch (err) {
+      console.error("[store] Échec de lecture Supabase (getCharacter) — fallback sur data/characters.json:", err);
+    }
+    // Le personnage matché peut venir du fallback local (table Supabase vide/inaccessible) :
+    // on le retrouve dans data/characters.json plutôt que de renvoyer 404.
+    return characters.find((c) => c.id === id) ?? null;
   };
 
   const getSession = async (id: string): Promise<QuizSession | null> => {

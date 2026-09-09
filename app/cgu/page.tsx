@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PLANS } from "@/lib/plans";
 
 export const metadata: Metadata = {
   title: "Conditions générales — Ta-réincarnation",
@@ -20,7 +21,7 @@ const sections: { title: string; paragraphs: string[] }[] = [
   {
     title: "3. Paiements",
     paragraphs: [
-      "Le déblocage de la fiche complète se fait via paiement Mobile Money (MTN MoMo, Moov Money) traité par un prestataire de paiement (Saspay). Les tarifs sont de 500 FCFA (Standard), 1000 FCFA (Premium) et 1200 FCFA (Pack 3 révélations). Aucun numéro de téléphone n'est stocké par Ta-réincarnation : il est traité directement par le prestataire de paiement.",
+      `Le déblocage de la fiche complète se fait via paiement Mobile Money (MTN MoMo, Moov Money) traité par un prestataire de paiement (Saspay). Les tarifs sont de ${PLANS.standard.price} FCFA (${PLANS.standard.name}), ${PLANS.premium.price} FCFA (${PLANS.premium.name}) et ${PLANS.pack.price} FCFA (${PLANS.pack.name}). Aucun numéro de téléphone n'est stocké par Ta-réincarnation : il est traité directement par le prestataire de paiement.`,
     ],
   },
   {
@@ -38,7 +39,7 @@ const sections: { title: string; paragraphs: string[] }[] = [
   {
     title: "6. Contact",
     paragraphs: [
-      "Pour toute question, écris à contact@ta-reincarnation.com (adresse à personnaliser lors de la mise en production).",
+      "Pour toute question, écris à contact@ta-reincarnation.com.",
     ],
   },
 ];

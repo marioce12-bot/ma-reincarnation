@@ -29,6 +29,23 @@ const steps = [
   },
 ];
 
+const trustPoints = [
+  { emoji: "⚡", title: "2 minutes", text: "Pas besoin de compte, pas d'inscription." },
+  { emoji: "🎭", title: "Une révélation unique", text: "Ton résultat dépend de tes réponses." },
+  { emoji: "📜", title: "Une histoire personnalisée", text: "Nom, époque, lieu et récit complet." },
+  { emoji: "🔒", title: "Paiement sécurisé", text: "Mobile Money — MTN MoMo / Moov Money." },
+];
+
+const faq = [
+  { q: "Est-ce réel ?", a: "Non. C'est une expérience 100 % ludique, sans valeur scientifique ni ésotérique." },
+  { q: "Dois-je créer un compte ?", a: "Non, jamais. Garde simplement le lien de ta révélation pour la retrouver." },
+  {
+    q: "Combien ça coûte ?",
+    a: `L'aperçu est gratuit. La fiche complète démarre à ${PLANS.standard.price} FCFA, avec un plan Premium à ${PLANS.premium.price} FCFA et un pack 3 révélations à ${PLANS.pack.price} FCFA.`,
+  },
+  { q: "Puis-je recommencer ?", a: "Oui, autant de fois que tu veux — chaque tentative peut révéler une vie différente." },
+];
+
 export default function Landing() {
   const characters = charactersJson as unknown as Character[];
   const cards = examples.map((e) => {
@@ -50,12 +67,35 @@ export default function Landing() {
             Réponds à 6 questions et découvre qui tu étais dans une vie antérieure : nom, époque,
             lieu et ton histoire complète.
           </p>
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-qui-etais-tu.webp"
+            alt="Qui étais-tu vraiment dans une autre vie ?"
+            width={1122}
+            height={1402}
+            className="mx-auto mt-7 w-full max-w-sm rounded-3xl border border-white/10 shadow-2xl shadow-black/40"
+          />
+
           <div className="mt-7 hidden md:block">
             <Cta />
           </div>
           <p className="mt-3 text-xs text-sand/50">
             {`Aperçu gratuit · moins de 2 minutes · dès ${PLANS.standard.price} FCFA pour la fiche complète`}
           </p>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="mx-auto mt-14 max-w-3xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-quatre-vies.webp"
+            alt="Quatre vies passées possibles : reine africaine, samouraï, prêtresse égyptienne, général romain"
+            width={1536}
+            height={1024}
+            className="w-full rounded-3xl border border-white/10"
+          />
         </section>
       </Reveal>
 
@@ -107,6 +147,66 @@ export default function Landing() {
             </Reveal>
           ))}
         </ol>
+      </section>
+
+      <section className="mx-auto mt-14 max-w-xl">
+        <Reveal>
+          <h2 className="text-center font-display text-xl font-semibold">Ta carte de destin</h2>
+          <p className="mt-2 text-center text-sm text-sand/70">
+            En Premium, ta révélation devient une carte à partager sur WhatsApp, Instagram ou
+            TikTok — comme celle-ci.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/carte-exemple-amina.webp"
+            alt="Exemple de carte de destin : Reine Amina du royaume de Zazzau"
+            width={1122}
+            height={1402}
+            className="mx-auto mt-6 w-full max-w-xs rounded-3xl border border-white/10 shadow-2xl shadow-black/40"
+          />
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mt-4 text-center text-xs text-sand/50">
+            Exemple généré pour Ta-réincarnation · ta carte sera unique, basée sur tes réponses.
+          </p>
+        </Reveal>
+      </section>
+
+      <section className="mx-auto mt-14 max-w-xl">
+        <Reveal>
+          <h2 className="text-center font-display text-xl font-semibold">Pourquoi essayer ?</h2>
+        </Reveal>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {trustPoints.map((t, i) => (
+            <Reveal key={t.title} delay={i * 100}>
+              <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <span className="text-xl">{t.emoji}</span>
+                <div>
+                  <p className="text-sm font-semibold">{t.title}</p>
+                  <p className="mt-1 text-xs text-sand/60">{t.text}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-14 max-w-xl">
+        <Reveal>
+          <h2 className="text-center font-display text-xl font-semibold">Questions fréquentes</h2>
+        </Reveal>
+        <div className="mt-5 space-y-3">
+          {faq.map((f, i) => (
+            <Reveal key={f.q} delay={i * 80}>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm font-semibold text-gold2">{f.q}</p>
+                <p className="mt-1 text-sm text-sand/70">{f.a}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-10 border-t border-white/10 bg-night/90 p-4 backdrop-blur md:hidden">
