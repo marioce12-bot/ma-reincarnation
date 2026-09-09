@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { QUESTIONS } from "@/lib/quiz";
+import DestinyLoader from "@/components/DestinyLoader";
 
 const TOTAL_STEPS = QUESTIONS.length + 1;
+const MIN_LOADER_MS = 3400;
 
 interface MatchResponse {
   id: string;
@@ -47,7 +49,7 @@ export default function QuizClient() {
     try {
       const lastSession = localStorage.getItem("tri_last_session");
       const packFrom = lastSession ? (JSON.parse(lastSession) as { id?: string }).id : undefined;
-      const res = await fetch("/api/match", {
+      const matchPromise = fetch("/api/match", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -56,6 +58,8 @@ export default function QuizClient() {
           pack_from: packFrom,
         }),
       });
+      const minDelay = new Promise((resolve) => window.setTimeout(resolve, MIN_LOADER_MS));
+      const [res] = await Promise.all([matchPromise, minDelay]);
       if (!res.ok) throw new Error("match_failed");
       const data = (await res.json()) as MatchResponse;
       localStorage.setItem("tri_last_session", JSON.stringify({ id: data.id }));
@@ -67,13 +71,7 @@ export default function QuizClient() {
   }
 
   if (submitting) {
-    return (
-      <main className="flex min-h-dvh flex-col items-center justify-center gap-6 px-5 text-center">
-        <span className="text-5xl animate-pulse">🔮</span>
-        <p className="font-display text-2xl">Les esprits croisent les étoiles…</p>
-        <p className="text-sm text-sand/60">Quelques secondes — ta vie antérieure se souvient de toi.</p>
-      </main>
-    );
+    return <DestinyLoader />;
   }
 
   const progress = (step / TOTAL_STEPS) * 100;
