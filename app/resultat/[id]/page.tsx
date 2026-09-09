@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CharacterAvatar from "@/components/CharacterAvatar";
+import DestinyReveal from "@/components/DestinyReveal";
 import { affinityMeta } from "@/lib/eras";
 import { PLANS } from "@/lib/plans";
 import { matchedTagsFor, userAffinity } from "@/lib/matching";
@@ -43,27 +44,29 @@ export default async function ResultPage({
 
   return (
     <main className="mx-auto max-w-xl px-5 pb-16 pt-10">
-      <header className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center">
-        <p className="text-xs uppercase tracking-[0.3em] text-sand/50">Ta vie antérieure</p>
-        <div className="mt-4 flex justify-center">
-          <div
-            className="rounded-full p-1"
-            style={{ background: `linear-gradient(145deg, ${meta.to}, ${meta.from})` }}
-          >
-            <CharacterAvatar character={character} size={96} className="rounded-full" />
+      <DestinyReveal>
+        <header className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-sand/50">Ta vie antérieure</p>
+          <div className="mt-4 flex justify-center">
+            <div
+              className="animate-pulse-glow rounded-full p-1"
+              style={{ background: `linear-gradient(145deg, ${meta.to}, ${meta.from})` }}
+            >
+              <CharacterAvatar character={character} size={96} className="rounded-full" />
+            </div>
           </div>
-        </div>
-        <h1 className="mt-4 font-display text-3xl font-bold leading-snug">{character.name}</h1>
-        <p className="mt-2 text-sm text-sand/70">{character.era}</p>
-        <div className="mt-5 flex flex-wrap justify-center gap-2">
-          <span className="rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-xs font-bold text-gold2">
-            {session.compatibility_score} % de compatibilité
-          </span>
-          <span className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-sand/80">
-            {session.zodiac ? `Ton signe : ${session.zodiac}` : "Signe inconnu"}
-          </span>
-        </div>
-      </header>
+          <h1 className="mt-4 font-display text-3xl font-bold leading-snug">{character.name}</h1>
+          <p className="mt-2 text-sm text-sand/70">{character.era}</p>
+          <div className="mt-5 flex flex-wrap justify-center gap-2">
+            <span className="rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-xs font-bold text-gold2">
+              {session.compatibility_score} % de compatibilité
+            </span>
+            <span className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-sand/80">
+              {session.zodiac ? `Ton signe : ${session.zodiac}` : "Signe inconnu"}
+            </span>
+          </div>
+        </header>
+      </DestinyReveal>
 
       {plan ? (
         <UnlockedResult
