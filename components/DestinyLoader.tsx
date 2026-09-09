@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 
 const STAGES = [
-  { icon: "🔮", text: "Les esprits croisent les étoiles…" },
-  { icon: "🌌", text: "Ton signe s'aligne avec les siècles…" },
-  { icon: "📜", text: "Une vie oubliée se souvient de toi…" },
-  { icon: "✨", text: "Le voile est sur le point de se lever…" },
+  { icon: "🔮", text: "Analyse de tes choix…" },
+  { icon: "🌍", text: "Recherche des correspondances culturelles…" },
+  { icon: "🌌", text: "Analyse de ton profil symbolique…" },
+  { icon: "🧬", text: "Croisement des archétypes…" },
+  { icon: "📜", text: "Recherche de ta résonance historique…" },
+  { icon: "✨", text: "Quelque chose vient d'apparaître…" },
 ];
 
 export default function DestinyLoader() {
@@ -15,7 +17,7 @@ export default function DestinyLoader() {
   useEffect(() => {
     const id = window.setInterval(() => {
       setStage((s) => Math.min(s + 1, STAGES.length - 1));
-    }, 850);
+    }, 700);
     return () => window.clearInterval(id);
   }, []);
 
@@ -27,7 +29,7 @@ export default function DestinyLoader() {
       <p key={stage} className="animate-fade-in font-display text-2xl">
         {current.text}
       </p>
-      <p className="text-sm text-sand/50">Quelques secondes — ta vie antérieure se souvient de toi.</p>
+      <p className="text-sm text-sand/50">Quelques secondes — les fragments de ton âme se réunissent.</p>
       <div className="mt-2 flex gap-2">
         {STAGES.map((_, i) => (
           <span
