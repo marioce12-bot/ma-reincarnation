@@ -22,6 +22,7 @@ export default function QuizClient() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lastAnswers, setLastAnswers] = useState<Record<string, string> | null>(null);
 
   const question = step > 0 ? QUESTIONS[step - 1] : null;
 
@@ -46,6 +47,7 @@ export default function QuizClient() {
   async function submit(finalAnswers: Record<string, string>) {
     setSubmitting(true);
     setError(null);
+    setLastAnswers(finalAnswers);
     try {
       const lastSession = localStorage.getItem("tri_last_session");
       const packFrom = lastSession ? (JSON.parse(lastSession) as { id?: string }).id : undefined;
@@ -60,12 +62,21 @@ export default function QuizClient() {
       });
       const minDelay = new Promise((resolve) => window.setTimeout(resolve, MIN_LOADER_MS));
       const [res] = await Promise.all([matchPromise, minDelay]);
-      if (!res.ok) throw new Error("match_failed");
-      const data = (await res.json()) as MatchResponse;
-      localStorage.setItem("tri_last_session", JSON.stringify({ id: data.id }));
-      router.push(`/resultat/${data.id}`);
-    } catch {
-      setError("Les esprits ont perdu le fil. Réessaie dans un instant.");
+      let data: MatchResponse | { error?: string };
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Réponse invalide du serveur.");
+      }
+      if (!res.ok) {
+        throw new Error(
+          "error" in data && data.error ? data.error : "Les esprits ont perdu le fil."
+        );
+      }
+      localStorage.setItem("tri_last_session", JSON.stringify({ id: (data as MatchResponse).id }));
+      router.push(`/resultat/${(data as MatchResponse).id}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Les esprits ont perdu le fil. Réessaie dans un instant.");
       setSubmitting(false);
     }
   }
@@ -149,7 +160,19 @@ export default function QuizClient() {
         </section>
       )}
 
-      {error && <p className="mt-4 text-center text-sm text-red-300">{error}</p>}
+      {error && (
+        <div className="mt-6 rounded-2xl border border-red-400/40 bg-red-500/10 p-4 text-center">
+          <p className="text-sm font-semibold text-red-200">😕 {error}</p>
+          {lastAnswers && (
+            <button
+              onClick={() => void submit(lastAnswers)}
+              className="mt-3 rounded-xl bg-red-400/20 px-4 py-2 text-sm font-bold text-red-100 transition hover:bg-red-400/30"
+            >
+              ↻ Réessayer
+            </button>
+          )}
+        </div>
+      )}
     </main>
   );
 }
