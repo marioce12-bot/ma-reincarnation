@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #14102b;
+  --color-night2: #221a4d;
+  --color-sand: #f4ead8;
+  --color-gold: #d9a441;
+  --color-gold2: #f2c979;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+}
+
+body {
+  background:
+    radial-gradient(900px 500px at 80% -100px, rgba(139, 92, 246, 0.18), transparent 60%),
+    radial-gradient(700px 500px at 10% 15%, rgba(217, 164, 65, 0.12), transparent 60%),
+    var(--color-night);
+  color: var(--color-sand);
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-night);
+}
