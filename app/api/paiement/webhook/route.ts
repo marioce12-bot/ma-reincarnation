@@ -1,4 +1,4 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getStore } from "@/lib/store";
 import { planByAmount } from "@/lib/plans";
 
@@ -71,6 +71,24 @@ function findNumberByKeys(obj: unknown, keys: string[]): number | null {
 
 // Notre référence est un uuid de 24 caractères hexadécimaux.
 const REF_PATTERN = /^[a-f0-9]{24}$/i;
+function findStringByValue(obj: unknown, value: string): boolean {
+  if (typeof obj === "string") return obj === value;
+  if (Array.isArray(obj)) return obj.some((item) => findStringByValue(item, value));
+  if (obj && typeof obj === "object") {
+    for (const item of Object.values(obj)) {
+      if (findStringByValue(item, value)) return true;
+    }
+  }
+  return false;
+}
+
+function secretMatches(req: Request, payload: Record<string, unknown>): boolean {
+  const secret = process.env.SASPAY_WEBHOOK_SECRET ?? process.env.SASPAY_SECRET;
+  if (!secret) return true; // pas de secret configuré → on accepte
+  if (req.headers.get("x-webhook-secret") === secret) return true;
+  if (new URL(req.url).searchParams.get("secret") === secret) return true;
+  return findStringByValue(payload, secret); // le payload peut contenir le secret
+}
 
 function findStringByPattern(obj: unknown, pattern: RegExp): string | null {
   if (typeof obj === "string") return pattern.test(obj) ? obj.toLowerCase() : null;
@@ -136,13 +154,8 @@ export async function POST(req: Request) {
   const payload = await readPayload(req);
   console.log("[webhook saspay] payload:", JSON.stringify(payload).slice(0, 2000));
 
-  const secret = process.env.SASPAY_WEBHOOK_SECRET;
-  if (secret) {
-    const header = req.headers.get("x-webhook-secret");
-    const query = new URL(req.url).searchParams.get("secret");
-    if (header !== secret && query !== secret) {
-      return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-    }
+  if (!secretMatches(req, payload)) {
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
   if (!isSuccessful(payload)) {
