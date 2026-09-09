@@ -15,6 +15,10 @@ export default function Footer() {
             Conditions générales
           </Link>
           {" · "}
+          <Link href="/credits" className="underline underline-offset-2 hover:text-sand">
+            Crédits images
+          </Link>
+          {" · "}
           Paiement Mobile Money (MTN MoMo, Moov Money)
         </p>
       </footer>

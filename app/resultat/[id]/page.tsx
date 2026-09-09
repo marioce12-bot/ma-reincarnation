@@ -4,6 +4,7 @@ import CharacterAvatar from "@/components/CharacterAvatar";
 import DestinyReveal from "@/components/DestinyReveal";
 import { affinityMeta } from "@/lib/eras";
 import { PLANS } from "@/lib/plans";
+import PlanChooser from "@/components/PlanChooser";
 import { matchedTagsFor, userAffinity } from "@/lib/matching";
 import { TAG_LABELS } from "@/lib/quiz";
 import { getStore } from "@/lib/store";
@@ -107,15 +108,10 @@ function LockedResult({
       </div>
 
       <div className="mt-6">
-        <Link
-          href={`/paiement/${session.id}`}
-          className="block rounded-2xl bg-gold px-6 py-4 text-center text-lg font-bold text-night shadow-lg shadow-gold/20 transition hover:bg-gold2"
-        >
-          {`Débloquer ma fiche complète — dès ${PLANS.standard.price} FCFA`}
-        </Link>
-        <p className="mt-3 text-center text-xs text-sand/50">
-          Paiement Mobile Money (MTN MoMo, Moov Money) · débloqué en 30 secondes
+        <p className="mb-3 text-center font-display text-lg font-semibold">
+          Choisis ta révélation
         </p>
+        <PlanChooser sessionId={session.id} />
       </div>
 
       <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-center text-xs leading-relaxed text-sand/60">

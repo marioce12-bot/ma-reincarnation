@@ -18,12 +18,19 @@ export interface NewSession {
   pack_credits: number;
 }
 
+export interface PendingPayment {
+  session_id: string;
+  plan: PlanId;
+}
+
 export interface Store {
   listCharacters(): Promise<Character[]>;
   getCharacter(id: string): Promise<Character | null>;
   createSession(input: NewSession): Promise<QuizSession>;
   getSession(id: string): Promise<QuizSession | null>;
   markPaid(id: string, plan: PlanId, ref: string | null): Promise<QuizSession | null>;
+  createPendingPayment(sessionId: string, plan: PlanId, ref: string): Promise<void>;
+  getPendingPayment(ref: string): Promise<PendingPayment | null>;
   consumePackCredit(sourceId: string): Promise<boolean>;
 }
 
@@ -33,10 +40,11 @@ const AMOUNTS: Record<PlanId, number> = { standard: 200, premium: 500, pack: 100
 
 // Mode démo (sans Supabase) : les sessions vivent en mémoire du process Node.
 function memoryStore(): Store {
-  type MemState = { sessions: Map<string, QuizSession> };
+  type MemState = { sessions: Map<string, QuizSession>; pending: Map<string, PendingPayment> };
   const g = globalThis as { __triMemory?: MemState };
-  g.__triMemory ??= { sessions: new Map() };
+  g.__triMemory ??= { sessions: new Map(), pending: new Map() };
   const sessions = g.__triMemory.sessions;
+  const pending = g.__triMemory.pending;
 
   return {
     async listCharacters() {
@@ -71,6 +79,12 @@ function memoryStore(): Store {
       s.paid_at = new Date().toISOString();
       if (plan === "pack") s.pack_credits = (s.pack_credits ?? 0) + 2;
       return s;
+    },
+    async createPendingPayment(sessionId, plan, ref) {
+      pending.set(ref, { session_id: sessionId, plan });
+    },
+    async getPendingPayment(ref) {
+      return pending.get(ref) ?? null;
     },
     async consumePackCredit(sourceId) {
       const s = sessions.get(sourceId);
@@ -132,16 +146,48 @@ function supabaseStore(client: SupabaseClient): Store {
     if (plan === "pack") updates.pack_credits = (current.pack_credits ?? 0) + 2;
     const { data, error } = await client.from("quiz_sessions").update(updates).eq("id", id).select().single();
     if (error) throw new Error(error.message);
-    await client.from("payments").insert({
-      session_id: id,
+    const confirmed = await client
+      .from("payments")
+      .update({ status: "confirmed" })
+      .eq("transaction_ref", ref)
+      .eq("status", "pending")
+      .select();
+    if (!confirmed.data || confirmed.data.length === 0) {
+      await client.from("payments").insert({
+        session_id: id,
+        provider: "saspay",
+        plan,
+        amount: AMOUNTS[plan],
+        currency: "XOF",
+        status: "confirmed",
+        transaction_ref: ref,
+      });
+    }
+    return data as unknown as QuizSession;
+  };
+
+  const createPendingPayment = async (sessionId: string, plan: PlanId, ref: string): Promise<void> => {
+    const { error } = await client.from("payments").insert({
+      session_id: sessionId,
       provider: "saspay",
       plan,
       amount: AMOUNTS[plan],
       currency: "XOF",
-      status: "confirmed",
+      status: "pending",
       transaction_ref: ref,
     });
-    return data as unknown as QuizSession;
+    if (error) throw new Error(error.message);
+  };
+
+  const getPendingPayment = async (ref: string): Promise<PendingPayment | null> => {
+    const { data } = await client
+      .from("payments")
+      .select("session_id, plan")
+      .eq("transaction_ref", ref)
+      .limit(1)
+      .maybeSingle();
+    if (!data) return null;
+    return { session_id: data.session_id as string, plan: data.plan as PlanId };
   };
 
   const consumePackCredit = async (sourceId: string): Promise<boolean> => {
@@ -155,7 +201,16 @@ function supabaseStore(client: SupabaseClient): Store {
     return !error;
   };
 
-  return { listCharacters, getCharacter, createSession, getSession, markPaid, consumePackCredit };
+  return {
+    listCharacters,
+    getCharacter,
+    createSession,
+    getSession,
+    markPaid,
+    createPendingPayment,
+    getPendingPayment,
+    consumePackCredit,
+  };
 }
 
 export function getStore(): Store {

@@ -40,11 +40,13 @@ L'intégration repose sur des **liens Saspay** générés une fois pour chaque p
 
 ### Fonctionnement du flux paiement
 
-1. L'utilisateur choisit un plan → ouvre le lien Saspay → paie en Mobile Money.
-2. Il revient sur la page et clique **« J'ai payé — Débloquer »** → `POST /api/paiement/confirmer` → la session passe en payé → la fiche s'ouvre.
-3. Chaque paiement est journalisé dans `payments` (montant, plan, référence de transaction si transmise).
+1. L'utilisateur choisit un plan (les 3 plans sont affichés directement sur la fiche verrouillée) → `POST /api/paiement/demarrer` enregistre un paiement **en attente** dans `payments` (référence unique) et pose un cookie de retour.
+2. Il paie sur le lien Saspay → après paiement, Saspay le renvoie vers l'URL de retour.
+3. La page de retour lit la référence (cookie), confirme le paiement en base et redirige automatiquement vers la révélation débloquée, avec un bouton de partage.
 
-**Limite connue (V1)** : avec un lien statique Saspay, la confirmation est déclarative (le bouton « J'ai payé »). Pour verrouiller davantage : configurer l'URL de retour du lien vers `/paiement/succes?session=...&plan=...`, puis ajouter une vérification webhook côté serveur en V2.
+**Important** : dans le dashboard Saspay, configure l'**URL de retour** de chacun des 3 liens vers `https://TON-DOMAIN/paiement/succes`. Sans cette configuration, la redirection automatique ne peut pas fonctionner.
+
+**Limite connue (V1)** : la liaison utilisateur ↔ paiement repose sur le cookie posé au clic (même navigateur). Si l'utilisateur paie sur un autre appareil ou bloque les cookies, le déblocage automatique ne peut pas s'appliquer (aucun bouton déclaratif « J'ai payé » : il faut alors confirmer manuellement en base ou via un webhook Saspay en V2).
 
 ## Architecture
 
@@ -53,8 +55,8 @@ app/
   page.tsx                 Landing (accroche, exemples, CTA unique)
   quiz/                    Quiz 6 étapes (date de naissance + 5 questions à emoji)
   resultat/[id]/           Aperçu flouté OU fiche complète selon le plan
-  paiement/[id]/           Choix des plans + liens Saspay + bouton « J'ai payé »
-  paiement/succes/         Confirmation et déblocage
+  paiement/[id]/           Choix des plans + démarrage du paiement Saspay
+  paiement/succes/         Retour Saspay : confirmation automatique + partage
   partage/[id]/            Images de partage + boutons WhatsApp/Facebook/IG/TikTok
   cgu/                     Conditions générales (mention ludique)
   api/match/               POST : calcule le matching + crée la session
