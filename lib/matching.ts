@@ -16,8 +16,10 @@ function tagWeights(answers: Record<string, string>): Record<string, number> {
   return weights;
 }
 
+// La question "lieu" ("Les Échos de l'âme") est la seule à porter une affinité
+// géographique/historique — les autres fragments n'alimentent que les tags de personnalité.
 export function userAffinity(answers: Record<string, string>): string | null {
-  const a = answers["epoque"];
+  const a = answers["lieu"];
   return a && a !== "surprise" ? a : null;
 }
 
