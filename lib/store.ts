@@ -23,6 +23,10 @@ export interface PendingPayment {
   plan: PlanId;
 }
 
+export interface PendingPaymentWithRef extends PendingPayment {
+  ref: string;
+}
+
 export interface Store {
   listCharacters(): Promise<Character[]>;
   getCharacter(id: string): Promise<Character | null>;
@@ -31,6 +35,7 @@ export interface Store {
   markPaid(id: string, plan: PlanId, ref: string | null): Promise<QuizSession | null>;
   createPendingPayment(sessionId: string, plan: PlanId, ref: string): Promise<void>;
   getPendingPayment(ref: string): Promise<PendingPayment | null>;
+  getOldestPendingPayment(plan: PlanId): Promise<PendingPaymentWithRef | null>;
   consumePackCredit(sourceId: string): Promise<boolean>;
 }
 
@@ -85,6 +90,12 @@ function memoryStore(): Store {
     },
     async getPendingPayment(ref) {
       return pending.get(ref) ?? null;
+    },
+    async getOldestPendingPayment(plan) {
+      for (const [ref, entry] of pending) {
+        if (entry.plan === plan) return { ...entry, ref };
+      }
+      return null;
     },
     async consumePackCredit(sourceId) {
       const s = sessions.get(sourceId);
@@ -190,6 +201,23 @@ function supabaseStore(client: SupabaseClient): Store {
     return { session_id: data.session_id as string, plan: data.plan as PlanId };
   };
 
+  const getOldestPendingPayment = async (plan: PlanId): Promise<PendingPaymentWithRef | null> => {
+    const { data } = await client
+      .from("payments")
+      .select("session_id, plan, transaction_ref")
+      .eq("status", "pending")
+      .eq("plan", plan)
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+    if (!data) return null;
+    return {
+      session_id: data.session_id as string,
+      plan: data.plan as PlanId,
+      ref: data.transaction_ref as string,
+    };
+  };
+
   const consumePackCredit = async (sourceId: string): Promise<boolean> => {
     const source = await getSession(sourceId);
     if (!source || (source.pack_credits ?? 0) <= 0) return false;
@@ -209,6 +237,7 @@ function supabaseStore(client: SupabaseClient): Store {
     markPaid,
     createPendingPayment,
     getPendingPayment,
+    getOldestPendingPayment,
     consumePackCredit,
   };
 }

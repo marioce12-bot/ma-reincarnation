@@ -52,3 +52,10 @@ export const CURRENCIES = "FCFA";
 export function saspayLink(plan: PlanId): string {
   return (process.env[PLANS[plan].linkEnv] ?? "").trim();
 }
+
+export function planByAmount(amount: number): PlanId | null {
+  for (const plan of Object.values(PLANS)) {
+    if (plan.price === amount) return plan.id;
+  }
+  return null;
+}

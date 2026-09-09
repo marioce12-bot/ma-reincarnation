@@ -46,7 +46,18 @@ L'intégration repose sur des **liens Saspay** générés une fois pour chaque p
 
 **Important** : dans le dashboard Saspay, configure l'**URL de retour** de chacun des 3 liens vers `https://TON-DOMAIN/paiement/succes`. Sans cette configuration, la redirection automatique ne peut pas fonctionner.
 
-**Limite connue (V1)** : la liaison utilisateur ↔ paiement repose sur le cookie posé au clic (même navigateur). Si l'utilisateur paie sur un autre appareil ou bloque les cookies, le déblocage automatique ne peut pas s'appliquer (aucun bouton déclaratif « J'ai payé » : il faut alors confirmer manuellement en base ou via un webhook Saspay en V2).
+### Webhook Saspay (recommandé)
+
+Si Saspay propose un champ **Webhook / IPN**, indique : `https://TON-DOMAIN/api/paiement/webhook`.
+
+Le webhook confirme les paiements même hors redirection navigateur :
+- si le payload contient notre référence (champ `custom_data`/`metadata`/`reference`…), le paiement correspondant est confirmé précisément ;
+- sinon, le webhook confirme **le plus ancien paiement en attente du plan correspondant au montant** (200/500/1000 FCFA) ;
+- chaque payload reçu est loggué (`[webhook saspay] payload:`) pour ajuster le mapping depuis les logs Vercel si besoin.
+
+Optionnel : définis `SASPAY_WEBHOOK_SECRET` et configure le même secret dans Saspay (header `x-webhook-secret` ou `?secret=`) pour protéger l'endpoint.
+
+**Limite connue (V1)** : avec des liens statiques, si le payload du webhook ne contient ni notre référence ni un montant exploitable, la confirmation automatique ne peut pas s'appliquer (les payloads reçus sont alors visibles dans les logs Vercel pour adapter le mapping).
 
 ## Architecture
 
@@ -57,6 +68,7 @@ app/
   resultat/[id]/           Aperçu flouté OU fiche complète selon le plan
   paiement/[id]/           Choix des plans + démarrage du paiement Saspay
   paiement/succes/         Retour Saspay : confirmation automatique + partage
+  api/paiement/webhook/    Webhook Saspay : confirmation serveur-à-serveur
   partage/[id]/            Images de partage + boutons WhatsApp/Facebook/IG/TikTok
   cgu/                     Conditions générales (mention ludique)
   api/match/               POST : calcule le matching + crée la session
