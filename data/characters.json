@@ -5,12 +5,19 @@
     "era": "XVIIIe siècle — Royaume du Danhomè",
     "location": "Abomey (actuel Bénin)",
     "profession": "Conseillère du roi, gardienne des secrets",
-    "personality_tags": ["leader", "diplomate", "observateur", "charismatique"],
-    "affinity_tags": ["afrique-ancienne"],
+    "personality_tags": [
+      "leader",
+      "diplomate",
+      "observateur",
+      "charismatique"
+    ],
+    "affinity_tags": [
+      "afrique-ancienne"
+    ],
     "hook": "Tu marchais aux côtés des rois, sans jamais faire de bruit.",
     "story_short": "Tu étais Abiba, l'oreille et la mémoire de la cour d'Abomey. Née dans une famille de tisserandes, tu as gravi les marches du palais à force d'intelligence et de discrétion. Les chefs de guerre parlaient fort ; toi, tu écoutais mieux que quiconque. Le jour où tu as dénoué une intrigue qui menaçait le trône, le roi t'a prise pour conseillère. On disait que ta parole valait dix discours : tu apaisais les colères, arrangeais les alliances entre lignées, et personne ne savait jamais d'où te venaient tes informations. Tu portais un bracelet de cuivre que tu frottais quand tu réfléchissais. Les griottes ont gardé ton nom dans leurs chants : celle qui gouvernait sans trône. À ta mort, Abomey a pleuré une reine qui n'en portait jamais le titre.",
     "story_long": "Tu étais Abiba, née dans un quartier de tisserands d'Abomey, dans le royaume du Danhomè, au XVIIIe siècle. Petite, tu vendais des étoffes avec ta mère sur la place du marché, et tu apprenais tout : les visages, les dettes, les promesses non tenues. À quinze ans, tu remarquais des choses que les guerriers ne voyaient pas ; à vingt, le ministre des affaires du palais te réclamait par ton prénom. Ton pouvoir fut d'abord invisible. Tu écoutais les serviteurs, les joueurs de tambour, les femmes du harem, et tu recousais les informations comme ta mère recousait les pagnes. L'intrigue qui changea ta vie, c'était un complot de palais : deux chefs voulaient effacer le roi pendant la grande fête des coutumes. Tu l'as su par trois petits détails — un envoyé trop pressé, un sacrifice déplacé, un silence nouveau chez un homme bavard. Tu as parlé au bon moment, à la bonne personne, avec les mots justes. Le roi t'a faite conseillère, et tu devins son ambassadrice silencieuse : tu négociais les tributs, calmais les villages rebelles, plaçais les mariages qui évitaient les guerres. Les Européens qui débarquaient à la côte croyaient parler au royaume ; en vérité, ils parlaient à toi. Tu n'as jamais voulu de trône. Tu voulais l'oreille qui entend tout, la bouche qui pèse, la main qui tisse. Aujourd'hui encore, ce don t'a suivi : tu remarques ce que les autres taisent, et on te confie les secrets sans savoir pourquoi. Le destin ne change pas de visage — il change de siècle.",
-    "portrait_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Idia_mask_BM_Af1910_5-13_1.jpg",
+    "portrait_url": "/portraits/img-01-idia.jpg",
     "location_card_url": null
   },
   {
@@ -19,8 +26,14 @@
     "era": "XVIIe siècle — Pays tamberma",
     "location": "Vallée de l'Atakora (actuel Bénin-Togo)",
     "profession": "Forgeron-guerrier, défenseur du village",
-    "personality_tags": ["combattant", "protecteur", "creatif"],
-    "affinity_tags": ["afrique-ancienne"],
+    "personality_tags": [
+      "combattant",
+      "protecteur",
+      "creatif"
+    ],
+    "affinity_tags": [
+      "afrique-ancienne"
+    ],
     "hook": "Ton marteau rythmait le cœur du village.",
     "story_short": "Tu étais Kossi, forgeron et gardien des collines de l'Atakora. Dans les tours de terre battue des Tamberma, chacun portait un rôle ; toi, tu portais le feu. Chaque matin, tu réveillais la vallée du coup de marteau sur l'enclume ; chaque nuit, tu montais sur la terrasse pour veiller. Tu forgeais les houes qui nourrissaient, les lames qui protégeaient, les cloches qui appelaient les esprits. Quand les pillards descendaient des pistes, on criait ton nom avant même le tambour : ta lance savait attendre au bon endroit. On te disait dur, mais les enfants savaient que tes mains pliaient le fer avec douceur. Tu es mort vieux, près de ton feu, un outil inachevé sur l'enclume — pour que le village continue toujours de se forger.",
     "story_long": "Tu étais Kossi, né au pied des collines de l'Atakora, au XVIIe siècle, dans un village de tours d'argile où le grenier est un étage et la terrasse un rempart. Ton père était forgeron, ce qui faisait de toi à la fois un respecté et un à part : le forgeron touche le fer, et le fer touche les esprits. Tu as appris à souffler les braises avant d'apprendre à lire les traces des bêtes. Ton art, c'était la transformation : la pierre en outil, le minerai en lame, la peur en courage. Les saisons rythmaient ta forge — houes après les pluies, flèches avant les caravanes, cloches pour les cérémonies où tes créations parlaient aux ancêtres. Mais ton village était sur une route de pillards, et un forgeron fort est aussi une muraille. La nuit où quarante cavaliers descendirent la vallée, tu as grimpé sur la terrasse de la première tour, torse nu, ta lance forgée par tes mains, et tu as crié assez fort pour que toute la vallée sache que le village était prêt. Ils sont passés sans s'arrêter. On raconta ensuite que les collines avaient parlé. Tu as formé trois apprentis, épousé la fille du chef du grenier, et tu n'as perdu qu'un seul combat : celui contre la saison sèche de 1673, où tu as fait creuser des puits jusqu'à l'aube pendant quarante jours. Aujourd'hui, quand tu fixes un problème jusqu'à le résoudre, quand tu protèges les tiens sans faire de discours, c'est lui qui parle : le feu patient de Kossi.",
@@ -33,12 +46,19 @@
     "era": "XIVe siècle — Empire du Mali",
     "location": "Rives du fleuve Niger, près de Niani",
     "profession": "Griotte, conteuse et joueuse de kora",
-    "personality_tags": ["artiste", "erudit", "observateur", "charismatique"],
-    "affinity_tags": ["afrique-ancienne"],
+    "personality_tags": [
+      "artiste",
+      "erudit",
+      "observateur",
+      "charismatique"
+    ],
+    "affinity_tags": [
+      "afrique-ancienne"
+    ],
     "hook": "Les rois t'écoutaient pour savoir qui ils étaient.",
     "story_short": "Tu étais Aminata, griotte des rives du Niger, au temps de l'Empire du Mali. Ta voix connaissait mille ans d'histoires : les fondations de Niani, les caravanes de l'or, les batailles de Soundiata. On t'appelait pour les mariages, les trônes, les funérailles — parce qu'une société sans mémoire est une pirogue sans pagaie. Tu voyais les hommes tels qu'ils étaient : c'est pourquoi les puissants te craignaient un peu et t'écoutaient beaucoup. Tu as traversé le siècle en le racontant, couchée au bord du fleuve qui coule vers le nord, étrange et magnifique comme les vérités que tu portais. Les griots d'aujourd'hui chantent encore une ligne que tu as inventée : celui qui oublie ses racines grandit à l'envers.",
     "story_long": "Tu étais Aminata, née sur une rive du fleuve Niger au XIVe siècle, quand l'Empire du Mali étalait son or du Sahel jusqu'aux forêts. Fille de griotte, tu as grandi dans les assemblées : tu savais à six ans reconnaître l'humeur d'un chef à la façon dont il posait son bâton. Ta famille portait la mémoire des lignées — qui a fondé, qui a trahi, qui a sauvé — et cette charge est plus lourde qu'un sac de sel de Tadmekka. À dix-huit ans, tu as joué pour la cour de Niani devant des visiteurs venus de Tombouctou, du Jolof et du pays mossi ; ta kora disait les fleuves, ta voix disait les hommes. Tu n'inventais presque rien : tu observais. C'est cela qui te rendait dangereuse et précieuse. Un jour, un prince exigea que tu modifies un chant qui le embarrassait ; tu as refusé en souriant, enjouant l'assemblée, et le prince a ri de bon cœur — tu savais que la vérité, bien jouée, désarme plus sûrement que la flatterie. Tu as accompagné les caravanes jusqu'aux salines, les pirogues jusqu'aux confluences, apprenant un dialecte à chaque escale, rapportant des nouvelles avant les coursiers officiels. Tu as formé deux élèves, dont l'une chanta pour des empereurs. Et quand on te demandait pourquoi toujours dire les noms des ancêtres, tu répondais : un arbre qui coupe ses racines nourrit personne. Cette phrase-là, c'était la tienne. Elle a traversé six siècles pour arriver jusqu'à toi — car qui aime comprendre les gens plus vite que les autres reconnaît, en secret, la voix d'Aminata.",
-    "portrait_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Head_of_a_Queen_Mother_%28Iyoba%29_MET_DP104851.jpg",
+    "portrait_url": "/portraits/img-02-iyoba.jpg",
     "location_card_url": null
   },
   {
@@ -47,12 +67,18 @@
     "era": "XVe siècle — Empire songhaï",
     "location": "Tombouctou",
     "profession": "Marchand des caravanes transsahariennes",
-    "personality_tags": ["commercant", "negociateur", "explorateur"],
-    "affinity_tags": ["afrique-ancienne"],
+    "personality_tags": [
+      "commercant",
+      "negociateur",
+      "explorateur"
+    ],
+    "affinity_tags": [
+      "afrique-ancienne"
+    ],
     "hook": "Le désert connaissait ta voix mieux que ta propre ville.",
     "story_short": "Tu étais Idrissa, marchand de Tombouctou à la grande époque des caravanes. Ton or partait vers le Nord, ton sel venait du Nord, et entre les deux, il y avait toi : quarante jours de dunes, des langues et des valeurs qui changeaient à chaque puits. Tu savais compter mieux que les scribes et parler mieux que les juges. Tu perdais rarement — et quand tu perdais, tu transformais la dette en alliance. Tu as financé des écoles, racheté des captifs, armé des puits. On disait de toi que le désert connaissait ta voix mieux que ta propre ville. Et quand les tempêtes coupaient les routes, c'était toi qu'on envoyait réouvrir le chemin.",
     "story_long": "Tu étais Idrissa, né à Tombouctou au XVe siècle, à l'heure où l'Empire songhaï faisait trembler les balances d'or du Caire. Ton père changeait le sel contre l'or aux abords du fleuve ; toi, tu as voulu aller plus loin — jusqu'aux mines, jusqu'aux salines de Taoudeni, jusqu'aux comptoirs du Nord où l'on parle avec les mains et les promesses. Ta première caravane, tu la menais à vingt-deux ans : soixante chameaux, un guide touareg au regard d'aigle, et une règle que tu ne brisais jamais — un marchand qui ment une fois perd le désert. Tu appris les langues comme d'autres apprennent les routes : songhaï, arabe, tamasheq, un peu de haoussa. Tu savais qu'un contrat vaut par la confiance, et la confiance par le partage du thé au bon moment. Trois fois, des concurrents ont essayé de te détruire par la calomnie ; trois fois, tu as gagné en convoquant les témoins plutôt que les cris. Tu as bâti une maison près du fleuve avec une cour pour les étudiants : payer l'encre d'un savant, disais-tu, rapporte plus que charger un chameau. À quarante ans, tu étais riche ; à cinquante, tu étais une institution — celui qui arbitre, avance l'argent, réconcilie. Le jour où une faction a fermé la route du sel pour faire pression sur la ville, on t'a envoyé négocier : tu es revenu avec un accord et une blague que les deux camps racontent encore. Ton âme d'aujourd'hui reconnaît tout cela : ce flair pour la bonne affaire, ce goût des grands espaces, cette générosité calculée qui fait dire oui avant même de discuter.",
-    "portrait_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Africa_Benin_Standing_Oba_Kimbell.jpg",
+    "portrait_url": "/portraits/img-05-oba-benin.jpg",
     "location_card_url": null
   },
   {
@@ -61,12 +87,19 @@
     "era": "XIIIe siècle — Comté de Provence",
     "location": "Village de Banon, Provence",
     "profession": "Herboriste et sage-femme",
-    "personality_tags": ["protecteur", "erudit", "spirituel", "solitaire"],
-    "affinity_tags": ["europe-medievale"],
+    "personality_tags": [
+      "protecteur",
+      "erudit",
+      "spirituel",
+      "solitaire"
+    ],
+    "affinity_tags": [
+      "europe-medievale"
+    ],
     "hook": "Tu savais ce que les plantes taisaient.",
     "story_short": "Tu étais Ermengarde, herboriste d'un village de Haute-Provence au XIIIe siècle. Ta maison sentait le thym séché et la cire ; ton jardin gardait des rangées que seules les femmes du pays savaient lire. Tu soignais les fièvres, aidais les naissances, apaisais les départs. Le curé te regardait de travers — trop de savoir, disait-il — mais quand son neveu brûlait de fièvre à minuit, c'est ta porte qu'on frappait. Tu n'as pas besoin d'être aimée de tous ; tu voulais être utile aux tiens. On a retrouvé après ta mort un carnet de recettes copié par trois mains différentes : ta science avait survécu au silence.",
     "story_long": "Tu étais Ermengarde, née vers 1220 dans un village de pierre sèche de Haute-Provence. Ta mère accouchait les femmes du canton ; ta grand-mère connaissait les herbes ; tu as réuni les deux héritages et ajouté le tien : une patience d'observatrice. Tu notais tout — la lune qui fait lever la sève, l'eau de pluie qui calme les brûlures, le moment exact où cueillir pour que le remède mordre. Le Moyen Âge, on l'imagine en châteaux et cathédrales ; pour la plupart des gens, c'était des récoltes, des maladies, des naissances — et toi au milieu, debout, les manches relevées. Tu as fait venir au monde plus de deux cents enfants, dont certains portèrent ton nom. Tu as fermé les yeux des vieux, tenu les mains des femmes, compté les mois en secret quand il le fallait. Deux fois, on t'a menacée de procès pour sorcellerie ; deux fois, le village entier a témoigné pour toi — les notables eux-mêmes, parce que leurs mères avaient survécu grâce à tes soins. Tu vivais seule depuis ta veuvage, avec une chatte grise et une mule obstinée, et tu préférais cela : trop de paroles noient la vérité. Ta richesse, tu l'enterrais littéralement — des graines, dans des pots, pour l'avenir. Le soir, tu notais tes observations dans un patois que seules deux personnes pouvaient lire. Ce carnet a circulé de main en main pendant trois générations. Si aujourd'hui tu aimes comprendre comment tout fonctionne, soigner sans bruit, et garder une part de mystère — tu viens de reconnaître ta propre signature.",
-    "portrait_url": null,
+    "portrait_url": "/portraits/img-15-reine-mary.jpg",
     "location_card_url": null
   },
   {
@@ -75,8 +108,14 @@
     "era": "XIIe siècle — Marche limousine",
     "location": "Un pont fortifié entre Limoges et Périgueux",
     "profession": "Chevalier, gardien du pont",
-    "personality_tags": ["combattant", "leader", "protecteur"],
-    "affinity_tags": ["europe-medievale"],
+    "personality_tags": [
+      "combattant",
+      "leader",
+      "protecteur"
+    ],
+    "affinity_tags": [
+      "europe-medievale"
+    ],
     "hook": "Ta parole valait plus que ton épée.",
     "story_short": "Tu étais Aldric, chevalier sans terre, chargé de garder un pont sur la route des pèlerins. Aux XIIe siècle, un pont est une fortune et une tentation : les seigneurs voisins rêvaient d'en prendre le péage. Tu as tenu trente ans, avec vingt hommes et une règle de fer : ici, on ne paie pas pour passer, on paie pour être en sécurité. Tu as protégé marchands, moines, pèlerins de Compostelle ; tu as rendu deux chevaux volés à un tisserand, désobéissant à ton propre suzerain. On t'a offert des terres pour fermer les yeux. Tu les as refusées debout, la main sur la garde. À ta mort, on n'a gravé ni batailles ni conquêtes — seulement : il a tenu.",
     "story_long": "Tu étais Aldric, cadet d'une famille pauvre de la Marche, au XIIe siècle. Sans héritage, tu avais reçu le seul bien qui reste quand on n'a rien : la réputation. Adoubé à dix-huit ans par un seigneur de passage, tu as appris que la lance s'oublie vite, mais qu'une parole donnée dure toute une vie. On te confia la garde d'un pont sur une grande route — un poste ingrat, loin des cours, où l'on meurt de petite embuscade plutôt que de grande bataille. Tu en fis une forteresse de confiance. Ta loi était simple : personne ne passe de nuit sans escorte, personne n'est volé de jour, et les pauvres passent gratis. Les marchands ont commencé à attendre ton pont pour voyager en caravane ; les abbés t'envoyaient des lettres de recommandation comme à un lieutenant d'armée. Un hiver, ton suzerain lui-même te demanda d'arrêter un marchand ennemi et de garder sa marchandise ; tu as refusé — le pont, disais-tu, appartient à ceux qui le traversent, pas à ceux qui le regardent. Tu as passé trois mois en disgrâce pour cette phrase. Puis la guerre est venue, et on s'est souvenu que tes vingt hommes tenaient mieux qu'une garnison de cent : tu as mené la nuit la contre-attaque qui a sauvé le bourg, puis tu es retourné à ton pont, comme le berger retourne à son troupeau. Tu es mort à soixante ans, sur le banc de pierre où tu prenais le frais. Le pacte que ton âme a gardé depuis : protéger sans posséder, commander en servant. Si tu ne supportes pas l'injustice faite aux faibles, et si on se fie à ta parole plus qu'aux contrats — c'est ton pont que tu gardes encore, quelque part.",
@@ -89,8 +128,15 @@
     "era": "XIIIe siècle — Royaume de France",
     "location": "Chartres",
     "profession": "Maîtresse verrière de la cathédrale",
-    "personality_tags": ["artiste", "creatif", "spirituel", "observateur"],
-    "affinity_tags": ["europe-medievale"],
+    "personality_tags": [
+      "artiste",
+      "creatif",
+      "spirituel",
+      "observateur"
+    ],
+    "affinity_tags": [
+      "europe-medievale"
+    ],
     "hook": "Tu faisais danser la lumière dans la pierre.",
     "story_short": "Tu étais Inès, maîtresse verrière, formée sur le chantier de la cathédrale de Chartres. Ton atelier cuisait le sable à mille degrés et tes mains connaissaient les verres par le son, comme un musicien ses cordes. On disait que tes bleus avaient un cœur — celui d'un ciel d'avant l'orage. Quand le vent de 1219 renversa les échafaudages et brisa des baies, c'est toi qui as recomposé les morceaux comme on raccommoderait un ciel. Les paysans montaient l'hiver pour se chauffer à la couleur de tes verrières. Tu n'as pas signé une seule œuvre : la lumière, elle, te reconnaissait.",
     "story_long": "Tu étais Inès, née dans une famille de vitraillers itinérants au XIIIe siècle, sur le plus grand chantier du monde chrétien : la cathédrale de Chartres. La ville entière respirait la poussière de calcaire et le feu des fours ; toi, tu as grandi entre les charpentes et les corbeaux. Ton père te laissait couper les petits morceaux ; à dix-sept ans, tu découpais mieux que lui — ton secret : observer la lumière avant de toucher le verre. Chaque baie est une pensée faite de deux mille éclats ; il faut comprendre où le soleil se posera à la mi-octobre avant de choisir un rouge. Ton chef-d'œuvre, ce fut une rose de douze pieds : on te la confia après l'incendie de 1219, quand les ateliers manquaient de bras et que le temps manquait encore plus. Tu as travaillé deux hivers avec quatre compagnons, dormant dans l'atelier, les mains collées de plomb, les yeux pleins de bleu. Les chanoines voulaient corriger tes visages — trop vivants, disaient-ils. Tu as défendu chaque trait avec une ténacité douce, et les visages sont restés. Ce que personne ne savait : tu glissais dans chaque vitrail un détail du peuple — un boulanger dans la foule d'un miracle, ta mère dans un visage d'ange. La cathédrale a été consacrée sans que ton nom soit prononcé une seule fois. Tu t'en fichais avec élégance : à chaque fin d'après-midi d'automne, ton rouge traversait la nef comme un brasier tendre, et les vieux pleuraient sans savoir pourquoi. Si aujourd'hui tu crées des choses que tu n'as pas besoin de signer, si la lumière d'une pièce te parle avant les meubles — alors tu as déjà vu ton œuvre se lever, pierre après pierre, au-dessus de Chartres.",
@@ -103,12 +149,19 @@
     "era": "VIIIe siècle — Chine des Tang",
     "location": "Chang'an (actuelle Xi'an)",
     "profession": "Calligraphe de la cour impériale",
-    "personality_tags": ["artiste", "erudit", "creatif", "observateur"],
-    "affinity_tags": ["asie-imperiale"],
+    "personality_tags": [
+      "artiste",
+      "erudit",
+      "creatif",
+      "observateur"
+    ],
+    "affinity_tags": [
+      "asie-imperiale"
+    ],
     "hook": "Tes traits retenaient le vent.",
     "story_short": "Tu étais Mei Lin, calligraphe à la cour des Tang, à Chang'an, la plus grande ville du monde. Fille d'un brodeur impérial, tu as appris que le geste précis vaut mille paroles. On te confiait les textes d'État, les poèmes d'anniversaire, les édits de paix. Ton pinceau obéissait à une règle que tu t'étais donnée : n'écrire que ce qu'on peut soutenir devant le Ciel. Les ministres contestaient tes choix de mots ; l'empereur, lui, gardait tes rouleaux dans sa bibliothèque privée. Tu as enseigné à quarante élèves que le souffle guide la main — et qu'un caractère mal écrit est un mensonge poli.",
     "story_long": "Tu étais Mei Lin, née à Chang'an au VIIIe siècle, quand un million d'habitants vivaient sous l'enseigne des Tang et que le monde entier passait par les portes de la ville : ambassadeurs de Perse, moines du Japon, musiciens de Samarcande. Ton père brodait les dragons du palais ; ta mère vendait des poèmes d'amour à la feuille. Toi, tu as choisi l'encre. À une époque où l'on copiait à la main tout ce qui devait durer, la calligraphie était un pouvoir : celui qui écrit l'édit le façonne. Tu as passé dix ans à copier les classiques dans la bibliothèque impériale, apprenant chaque style — le régulier comme une muraille, le courant comme une rivière, l'herbe comme un cri maîtrisé. Ton heure est venue le jour où un décret de paix devait être rédigé pour un khan de la steppe : les vieux maîtres proposaient des formules figées ; tu as écrit trois lignes où le trait montait comme un étendard, et le ministre des rites a dit : cela ressemble à ce que nous voulons dire. De là, on vint te chercher pour les actes importants — les alliances, les pardons, les poèmes d'adieu. Tu savais qu'un mot mal placé coûte des villages ; ton courage était de dire non aux puissants qui voulaient adoucir une vérité. Une fois, tu as rendu un rouleau blanc plutôt que d'écrire un mensonge d'État : tu as été punie d'un an de retrait, et l'histoire t'a donné raison. Tu as formé des élèves venus de Corée et du Japon, leur répétant : la main écrit ce que le cœur a pesé. Si aujourd'hui tu choisis tes mots comme on choisit ses gestes, et si une belle écriture te touche plus qu'un beau discours — ton encre n'a jamais séché.",
-    "portrait_url": null,
+    "portrait_url": "/portraits/img-11-imperatrice-xiaoyi.png",
     "location_card_url": null
   },
   {
@@ -117,8 +170,15 @@
     "era": "XVe siècle — Himalaya",
     "location": "Monastère de haute vallée, Himalaya",
     "profession": "Moine copiste et maître de méditation",
-    "personality_tags": ["spirituel", "solitaire", "erudit", "observateur"],
-    "affinity_tags": ["asie-imperiale"],
+    "personality_tags": [
+      "spirituel",
+      "solitaire",
+      "erudit",
+      "observateur"
+    ],
+    "affinity_tags": [
+      "asie-imperiale"
+    ],
     "hook": "Le silence était ta langue maternelle.",
     "story_short": "Tu étais Tenzin, moine d'un monastère accroché aux pentes de l'Himalaya. Ton travail quotidien : copier les textes sacrés à l'encre de suie, un souffle par trait, quarante années durant. Les visiteurs venaient te voir comme on va voir la montagne — pour se sentir petit et apaisé à la fois. Tu parlais peu, mais chaque phrase tombait juste, comme une pierre au fond d'un puits. Le jeune moine turbulent que tu as formé devint un maître respecté : ton héritage ne fut pas un nom, mais une manière d'être calme. On raconte que tu es mort en méditation, face aux sommets, avec un léger sourire.",
     "story_long": "Tu étais Tenzin, entré au monastère à sept ans, au XVe siècle, dans une vallée si haute que les corbeaux volent en dessous des nuages. Ton enfance avait été la faim et le froid ; le monastère t'a donné le feu et la question. Tu as appris le tibétain des textes, le souffle de la méditation, et surtout la patience : copier un livre sacré prend un hiver ; le comprendre en prend vingt. Ton maître te faisait recopier deux fois chaque page dont tu te vantais, et une fois celles dont tu doutais — pour t'apprendre que l'orgueil oublie et que le doute retient. À quarante ans, on te confia la bibliothèque : trois cents volumes que tu protégeais de l'humidité avec des étoffes de laine et de la veille des nuits de pluie. Quand un incendie menaça l'aile est, tu as sorti les livres avant tes propres coffres ; tu as dit en riant que tu n'avais rien qui mérite un sauvetage. Les villageois descendaient te consulter pour les disettes, les disputes de familles, les morts difficiles. Ton art était l'écoute : tu laissais les gens finir leurs phrases, ce qui, dans les montagnes, valait tous les conseils. Un jeune moine révolté voulait quitter l'habit ; tu l'as envoyé passer un hiver seul dans l'ermitage, et il est revenu de lui-même — tu disais qu'on ne retient pas l'eau dans le poing. Vers la fin, tu ne copiais plus : tu dictais. Les textes que ta main a recopiés existent encore dans certaines bibliothèques monastiques, comme ta patience existe encore quelque part en toi : ce calme profond que les autres remarquent sans savoir d'où il vient.",
@@ -131,12 +191,19 @@
     "era": "XVIe siècle — Japon des provinces",
     "location": "Vallée de Kiso, Japon",
     "profession": "Stratège samouraï, conseiller de clan",
-    "personality_tags": ["combattant", "observateur", "leader", "erudit"],
-    "affinity_tags": ["asie-imperiale"],
+    "personality_tags": [
+      "combattant",
+      "observateur",
+      "leader",
+      "erudit"
+    ],
+    "affinity_tags": [
+      "asie-imperiale"
+    ],
     "hook": "Tu gagnais les guerres avant qu'elles ne commencent.",
     "story_short": "Tu étais Kenji, stratège d'un clan de la vallée de Kiso, au temps des provinces en guerre. Petit, myope, jamais le plus fort du dojo — toujours le dernier debout. Ta méthode : connaître la route avant l'ennemi, le terrain mieux que ses propres soldats, la peur de l'adversaire comme ta poche. Tu as défendu ta vallée contre trois invasions avec deux fois moins d'hommes, en choisissant les lieux, les heures, les brumes. On t'appelait le stratège des cerisiers, parce que tu planifiais en regardant les fleurs : ce qui est beau ne dure pas — il faut agir au bon moment, ni avant, ni après.",
     "story_long": "Tu étais Kenji, né dans la vallée de Kiso au XVIe siècle, au cœur du Japon déchiré des daimyos. Ton père était maître de forge ; tes frères étaient grands et forts. Toi, tu comptais. À quatorze ans, tu avais mémorisé chaque gué de la rivière, chaque col fermé en hiver, chaque grange brûlable. Ton seigneur, un homme pragmatique, t'a pris comme éclaireur ; à vingt-cinq ans, tu étais son cerveau. Ta doctrine était simple et cruelle de lucidité : une bataille gagnée est une bataille évitée. Tu as nourri de faux renseignements les espions ennemis, déplacé des camps la nuit, réuni les villageois pour qu'ils parlent d'une armée double de sa taille. Quand l'invasion est venue — trois mille hommes contre mille deux cents — tu as laissé passer l'avant-garde dans un défilé clos, puis coupé le retour, et négocié le départ des survivants contre un tribut d'équipements : vaincre sans massacrer, pour que la paix de demain soit possible. Les jeunes samouraïs trouvaient ta prudence lâche ; après la troisième victoire, ils prenaient des notes. Tu taisais tes méthodes, tu écrivais tes leçons : un carnet en vingt pages que ton seigneur fit recopier pour ses descendants. À la fin de ta vie, la vallée connaissait dix ans de paix — ta vraie victoire, celle dont personne ne parle, parce qu'elle n'a pas eu lieu. Tu es mort sous ton cerisier préféré, au moment où les fleurs tombaient, comme tu l'avais prédit à tes élèves avec une précision troublante. Si tu vois les pièges avant qu'ils se referment et que tu préfères gagner sans bruit : Kenji n'a jamais quitté sa vallée — il l'a emportée avec lui.",
-    "portrait_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Akiyama_Buemon_-_Tsuki_hyakushi_-_Walters_95348.jpg",
+    "portrait_url": "/portraits/img-10-samourai-ukiyoe.jpg",
     "location_card_url": null
   },
   {
@@ -145,8 +212,15 @@
     "era": "IXe siècle — Cités mayas",
     "location": "Uxmal, Yucatán",
     "profession": "Astronome-scribe",
-    "personality_tags": ["erudit", "spirituel", "curieux", "observateur"],
-    "affinity_tags": ["ameriques-precoloniales"],
+    "personality_tags": [
+      "erudit",
+      "spirituel",
+      "curieux",
+      "observateur"
+    ],
+    "affinity_tags": [
+      "ameriques-precoloniales"
+    ],
     "hook": "Le ciel te parlait, et tu répondais en pierre.",
     "story_short": "Tu étais Itzel, astronome-scribe d'une cité maya du IXe siècle. Ton office : lire le ciel pour dire la terre — quand semer, quand récolter, quand les rois peuvent partir en guerre. Tu passais tes nuits sur les terrasses des palais, comptant les levers de Vénus, qui n'est pas une étoile mais un serment qui se renouvelle. Tu as calculé le retour des saisons avec une précision qui mettrait nos calendriers à l'épreuve. Les prêtres voulaient des prédictions ; tu leur donnais des probabilités. Tu es morte avant le grand silence de ta ville — et ce fut, peut-être, ta plus grande chance.",
     "story_long": "Tu étais Itzel, née à Uxmal au IXe siècle, dans un monde où l'architecture et le ciel se parlent : les escaliers alignés sur les solstices, les portes qui encadrent Vénus. Fille d'un scribe, tu as appris les glyphes avant d'apprendre à tresser ; ton premier maître fut un vieux prêtre aveugle qui connaissait le ciel par les odeurs de saison. Ton travail était immense et sans gloire : noter chaque nuit les levers, les occultations, les ombres portées sur les dalles de calibration. Vingt ans d'observations, table après table. Tu as découvert par toi-même que la période de Vénus ne faisait pas 584 jours exactement, et tu as corrigé les tables de ta cité contre l'avis des traditionalistes — tu as gagné : les fêtes sont tombées juste, les récoltes aussi. Ton autorité n'était pas celle de la voix, mais du calcul : quand tu disais d'attendre une saison avant la guerre, les chefs tapaient du pied, puis attendaient. Tu as formé trois apprentis scribes, leur répétant que le ciel est le seul maître qui ne ment jamais, à condition de le questionner assez longtemps. Tu voyais venir les signes du déclin — les récoltes maigres, les puits qui baissent, les alliances qui se défont — et tu notais tout, en professionnel, avec ce mélange de tristesse et de curiosité qui est le propre des vrais savants. Ton nom n'a pas survécu aux siècles ; tes calculs, plus fins que ta pierre, ont continué à tourner. Si tu aimes comprendre avant de croire, si le ciel nocturne te met un vertige de bonheur : c'était toi, sur la terrasse, la nuit où Vénus est revenue comme prévu.",
@@ -159,8 +233,14 @@
     "era": "XVe siècle — Empire inca",
     "location": "Route des Andes, entre Cusco et la côte",
     "profession": "Chasqui, messager impérial",
-    "personality_tags": ["explorateur", "protecteur", "curieux"],
-    "affinity_tags": ["ameriques-precoloniales"],
+    "personality_tags": [
+      "explorateur",
+      "protecteur",
+      "curieux"
+    ],
+    "affinity_tags": [
+      "ameriques-precoloniales"
+    ],
     "hook": "Ton souffle reliait des mondes entiers.",
     "story_short": "Tu étais Amaru, chasqui de l'Empire inca — un coureur des hauteurs, un relais vivant entre deux mondes. Sur les routes de pierre qui grimpent à quatre mille mètres, tu courais par tronçons, quipu en main, souffle en or. Un ordre de l'Inca mettait trois jours à parcourir ce qu'une mule met un mois à franchir. Tu connaissais chaque pierre glissante, chaque col, chaque nuage qui annonce la grêle. Deux fois, tu as couru brûlant de fièvre pour ne pas retarder un message de secours. On disait que l'empire entendait d'une oreille à l'autre en trois jours — et cette oreille, c'était toi.",
     "story_long": "Tu étais Amaru, né dans un village de haute vallée au XVe siècle, recruté jeune pour ta foulée et ta mémoire. Les chasquis ne portaient pas seulement des messages : ils portaient des quipus — ces cordes à nœuds qui disent les comptes, les troupeaux, les quotas — et des récits appris par cœur, mot pour mot, car dans l'empire, une phrase déformée coûte une récolte. Ton monde était vertical : du désert côtier aux cols glacés, tu traversais tous les climats d'une seule journée, connaissant les abris de pierre, les sources sûres, les heures où la foudre choisit les crêtes. Le système était d'une précision militaire : chaque relais, chaque fraîcheur de corps neuf, chaque passage de témoin. Mais le réseau, ce sont les hommes : tu as transporté des nouvelles de naissance impériale, des ordres de déplacement de peuples, une fois — tu l'as su plus tard — l'avertissement qui a sauvé un village d'une coulée. Ta fierté n'était pas la vitesse : c'était la fidélité. Jamais un nœud mal lu, jamais un récit raccourci. Tu as connu les pires journées — la neige à mi-cuisse sur le col, la brume qui efface le chemin — et tu les racontais en riant, parce qu'un coureur qui a peur n'a plus de souffle. À trente ans, tes genoux ont dit stop ; tu es devenu formateur des jeunes coureurs, enseignant l'art du rythme : ne pas gagner le premier tronçon, gagner le dernier. Si aujourd'hui tu ne supportes pas qu'un message soit mal transmis, si ton corps se sent vivant quand il va loin, seul, vers un but précis — c'est ton souffle, qui court encore entre Cusco et la mer.",
@@ -173,8 +253,14 @@
     "era": "Xe siècle — Abbassides",
     "location": "Bagdad, Maison de la Sagesse",
     "profession": "Astronome et mathématicienne",
-    "personality_tags": ["erudit", "curieux", "spirituel"],
-    "affinity_tags": ["monde-arabe"],
+    "personality_tags": [
+      "erudit",
+      "curieux",
+      "spirituel"
+    ],
+    "affinity_tags": [
+      "monde-arabe"
+    ],
     "hook": "Tu comptais les étoiles comme d'autres comptent les moutons.",
     "story_short": "Tu étais Zahra, astronome à Bagdad, au siècle où la Maison de la Sagesse recopiait le monde. Le jour, tu calculais ; la nuit, tu vérifiais. Avec un astrolabe de laiton et une patience d'acier, tu as repris les tables des Grecs, corrigé leurs mesures, formé des élèves venus d'Andalousie et du Khorasan. On te demandait pourquoi tant d'effort pour des points de lumière. Tu répondais : c'est le seul livre que Dieu a écrit sans mots — le moins qu'on puisse faire, c'est de le lire correctement.",
     "story_long": "Tu étais Zahra, née à Bagdad au Xe siècle, fille d'un horloger de la quartier des dinandiers — tu as grandi parmi les engrenages et les cadrans, et tu as toujours vu le ciel comme la plus belle horlogerie. La ville était alors l'endroit du monde où le savoir pesait de l'or : traductions du grec, observations persanes, chiffres venus d'Inde. Tu as étudié à la Maison de la Sagesse, la seule fille de ton groupe, tenue d'être deux fois meilleure pour compter une fois. Ton domaine : les tables astronomiques — ces calculs qui permettent de savoir où sera la Lune dans dix ans, où se lève le soleil pour orienter une mosquée, quand commence le mois pour le calendrier. Tu as repris les mesures de Ptolémée avec ton astrolabe, noté les écarts, osé écrire que les anciens s'étaient parfois trompés. Un vieux savant t'a humiliée en séance ; tu as répondu en présentant tes relevés, datés, signés, vérifiables — et le silence qui a suivi valait une victoire. Tu as conçu aussi des instruments : un quadrant amélioré, des tables de sinus plus fines, une clepsydre pour tes nuits d'observation. Ton argent, tu l'investissais en papier — copier, toujours copier, car une idée non copiée meurt avec son auteur. Deux de tes élèves ont fini directeur d'observatoires ; l'un, à Cordoue, a enseigné à son tour. Tu es morte en laissant un traité inachevé sur les variations de la Lune, avec une dernière phrase : le ciel est patient, les hommes le sont moins. Si les questions sans réponse t'empêchent de dormir — agréablement — et si la rigueur te semble une forme de prière : Zahra regarde toujours le même ciel, avec tes yeux.",
@@ -187,8 +273,15 @@
     "era": "Xe siècle — Sultanat d'Oman",
     "location": "Sohar, Oman",
     "profession": "Capitaine marchand",
-    "personality_tags": ["explorateur", "leader", "negociateur", "charismatique"],
-    "affinity_tags": ["monde-arabe"],
+    "personality_tags": [
+      "explorateur",
+      "leader",
+      "negociateur",
+      "charismatique"
+    ],
+    "affinity_tags": [
+      "monde-arabe"
+    ],
     "hook": "Les vents t'obéissaient par respect, pas par force.",
     "story_short": "Tu étais Omar, capitaine d'une sambuque marchande sortie de Sohar, au Xe siècle. Ton monde allait de l'Afrique de l'Est à la Chine par étapes : Basra, l'Inde, les épices de Malacca, la porcelaine. Tu naviguais aux étoiles et aux oiseaux, aux odeurs de terre et aux couleurs de l'eau. Marin dur, négoce équitable : ta réputation descendait les côtes plus vite que tes navires. Trois tempêtes ont voulu te garder ; tu es rentré chaque fois avec l'équipage au complet. Les ports racontaient que les vents te connaissaient par ton prénom.",
     "story_long": "Tu étais Omar, né à Sohar au Xe siècle, quand les navires d'Oman reliaient l'Islam à la Chine et rapportaient des récits que les géographes ne croyaient pas. Fils de négociant, tu as embarqué à douze ans comme mousse ; à vingt, tu savais lire la mer comme un texte : la couleur de l'eau qui annonce le récif, le vol des oiseaux de mer qui indique la terre, les nuages fixes au-dessus des îles invisibles. Ton art secret : la patience. La mousson choisit son moment ; le capitaine pressé est un capitaine perdu. Tu as commandé ta première sambuque à vingt-huit ans, avec une règle d'or que tout l'équipage connaissait : le bien de l'homme le plus pauvre à bord vaut celui du capitaine. Résultat : les meilleurs marins demandaient à servir sur ton navire, et ton chargement arrivait entier plus souvent que celui des autres. À Kilwa, tu as appris la côte d'Afrique ; à Calicut, les épices et la patience des marchands hindous ; à Canton, la porcelaine qu'il faut emballer comme un œuf. Tu as versé aux écoles de ton port une part de chaque voyage — ta conviction : le commerce prospère là où les gens savent lire. Une nuit, près de Socotra, ta flotte prise dans une tempête a perdu deux voiles ; tu as dirigé la coupe du mât de secours en chantant fort pour couvrir le vent, et tu as ri le lendemain en partageant la dernière réserve d'eau. À terre, tu négociais comme en mer : écouter deux fois plus que parler, laisser l'autre gagner quelque chose. Si tu as le goût du large et ce talent rare de faire vouloir les gens plutôt que de les contraindre — Omar t'a laissé sa boussole intérieure.",
@@ -201,12 +294,19 @@
     "era": "XIVe siècle — Polynésie",
     "location": "Archipel des Tuamotu",
     "profession": "Maîtresse-navigatrice",
-    "personality_tags": ["explorateur", "observateur", "artiste", "charismatique"],
-    "affinity_tags": ["oceanie-insulaire"],
+    "personality_tags": [
+      "explorateur",
+      "observateur",
+      "artiste",
+      "charismatique"
+    ],
+    "affinity_tags": [
+      "oceanie-insulaire"
+    ],
     "hook": "Tu lisais l'océan comme un livre ouvert.",
     "story_short": "Tu étais Tepua, maîtresse-navigatrice de l'archipel des Tuamotu, au XIVe siècle. Sans carte, sans boussole : les étoiles comme routes, les vagues comme phrases, les nuages comme indices, les oiseaux comme lettres. Tu as mené des pirogues à double coque à travers mille kilomètres d'îles éparpillées, transportant des familles, des plantes, des chants. Tu as retrouvé une île perdue que ta grand-mère décrivait en berceuse — trois nuits vers le soleil couchant d'octobre. On disait que tu ne cherchais pas la terre : tu lui faisais signe, et elle venait.",
     "story_long": "Tu étais Tepua, née sur un atoll des Tuamotu au XIVe siècle, dans une famille de navigateurs pour qui l'océan n'est pas une barrière mais une parenté. Ton apprentissage a commencé avant ta première pirogue : dormir dehors pour connaître les étoiles, goûter l'eau pour sentir les courants, apprendre les chants-chemins — ces généalogies de lieux qui encode les routes dans la mémoire. Les femmes de ta lignée naviguaient depuis des générations ; personne n'a trouvé à redire quand tu as pris la barre. Ta spécialité était l'invisible : les vagues longues que le vent du large pousse depuis deux mille kilomètres, et qui annoncent une île avant qu'on la voie. Tu lisais aussi les nuages verts suspendus au-dessus des lagons, les traînées d'oiseaux de pêche au crépuscule, l'odeur des fleurs emportées par le vent de terre. Ta grande traversée, celle que les anciens ont retenue, fut celle d'une pirogue de vingt personnes partant retrouver l'atoll de ta grand-mère — dont elle ne restait qu'une berceuse. Trois nuits vers le soleil couchant d'octobre, disait la chanson ; tu as vérifié avec les étoiles, corrigé avec les vagues, et tu as trouvé. Il y avait de l'eau douce, des cocotiers, un lagon aux poissons confiants. Tu y as planté les boutures transportées sous les bancs de la pirogue : taro, bananier, noni — la maison dans les mains, comme on dit. Tu as formé six navigateurs, leur apprenant l'humilité du métier : l'océan ne pardonne pas l'orgueil, mais récompense l'attention. Si tu te sens chez toi près de l'eau et que ton instinct lit les paysages avant ta raison : Tepua t'a laissé son héritage — le sens du large et l'oreille des vagues.",
-    "portrait_url": null,
+    "portrait_url": "/portraits/img-17-polynesien.jpg",
     "location_card_url": null
   },
   {
@@ -215,8 +315,15 @@
     "era": "XIIIe siècle — Samoa",
     "location": "Îles Samoa",
     "profession": "Gardienne des traditions orales",
-    "personality_tags": ["artiste", "erudit", "spirituel", "protecteur"],
-    "affinity_tags": ["oceanie-insulaire"],
+    "personality_tags": [
+      "artiste",
+      "erudit",
+      "spirituel",
+      "protecteur"
+    ],
+    "affinity_tags": [
+      "oceanie-insulaire"
+    ],
     "hook": "Les ancêtres te confiaient leurs histoires.",
     "story_short": "Tu étais Tala, gardienne des généalogies et des chants de ton archipel au XIIIe siècle. Dans ton monde, la mémoire est un temple sans murs : qui détient les récits tient la société droite. Tu connaissais les lignées jusqu'à la mer d'origine, les droits de pêche de chaque famille, les chants de guerre et de pardon. On te consultait avant les mariages, les guerres, les partages de terre. Tu disais : un peuple sans histoires est une pirogue sans balancier — il flotte, mais il tourne en rond. Trois cents ans après ta mort, on chantait encore tes vers aux mêmes occasions.",
     "story_long": "Tu étais Tala, née à Samoa au XIIIe siècle, dans une famille d'orateurs — ceux qui parlent pour les chefs et devant les assemblées. Ton monde connaissait l'écriture tard et peu : tout reposait sur la voix, la forme, la répétition. Tu as appris à neuf ans les généalogies — des centaines de noms enfilés comme des perles, où chaque chef peut retrouver ses ancêtres jusqu'aux îles d'origine. Ce savoir n'était pas décoratif : il réglait les terres, les mariages, les vengeances et les paix. Ton talent était double : une mémoire d'acier et un sens du rythme qui faisait que même les enfants écoutaient. Tu as composé des chants pour les grandeurs et pour les deuils, ouvert les cérémonies du kava de ta voix, arbitré des conflits de terre en rappelant le vers exact où un ancêtre avait posé une limite. Ton pouvoir dérangeait ; deux fois, des rivaux ont prétendu que tu déformais les récits. Ta riposte fut d'enseigner publiquement : tu as pris des élèves dans chaque famille rivale, à condition qu'ils apprennent tout — y compris ce qui n'arrange pas leur clan. La ruse devint honneur en trois saisons. Vieille, tu dictais tout à ta petite-fille, version par version, avec les variantes, disant : la mémoire qui n'admet pas ses versions n'est pas une mémoire, c'est une arme. Si tu portes les histoires de ta famille comme un trésor, si les gens t'écoutent naturellement quand tu racontes, si défendre le vrai te coûte moins que le calme — Tala posait déjà des balanciers sous les pirogues des autres, à l'autre bout du monde et du temps.",
