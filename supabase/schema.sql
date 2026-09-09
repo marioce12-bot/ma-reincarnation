@@ -38,10 +38,14 @@ create table if not exists payments (
   currency text not null default 'XOF',
   status text not null default 'pending',
   transaction_ref text,
+  saspay_session_id text,                 -- id de la session de checkout Saspay (vérification API)
   created_at timestamptz not null default now()
 );
 
 create index if not exists payments_session_idx on payments (session_id);
+
+-- Migration pour une base déjà créée avant ce champ :
+-- alter table payments add column if not exists saspay_session_id text;
 
 -- RLS : aucun accès public — l'app passe toujours par la clé service côté serveur.
 alter table characters enable row level security;

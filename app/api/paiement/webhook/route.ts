@@ -1,27 +1,27 @@
+import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getStore } from "@/lib/store";
 import { planByAmount } from "@/lib/plans";
+import { saspayApiDisponible, statutCheckout } from "@/lib/saspay";
 
 export const dynamic = "force-dynamic";
 
-// Saspay envoie le payload en JSON ou en formulaire ; on accepte les deux.
-async function readPayload(req: Request): Promise<Record<string, unknown>> {
-  const contentType = req.headers.get("content-type") ?? "";
-  const text = await req.text();
-  if (!contentType.includes("application/json")) {
-    const params = new URLSearchParams(text);
-    const obj: Record<string, unknown> = {};
-    for (const [k, v] of params.entries()) obj[k] = v;
-    return obj;
-  }
-  try {
-    return JSON.parse(text) as Record<string, unknown>;
-  } catch {
-    const params = new URLSearchParams(text);
-    const obj: Record<string, unknown> = {};
-    for (const [k, v] of params.entries()) obj[k] = v;
-    return obj;
-  }
+// Vérifie la signature SasPay: HMAC-SHA256 de "{timestamp}.{corps brut}".
+// Tolerance 5 min + comparaison en temps constant (cf. docs.saspay.me).
+function signatureValide(rawBody: string, headers: Headers): boolean {
+  const secret = process.env.SASPAY_WEBHOOK_SECRET;
+  if (!secret) return true; // pas de secret configuré → on accepte (payload loggué)
+  const signature = headers.get("x-webhook-signature") ?? "";
+  const timestamp = headers.get("x-webhook-timestamp") ?? "0";
+  const now = Math.floor(Date.now() / 1000);
+  if (Math.abs(now - Number(timestamp)) > 300) return false;
+  const expected = crypto
+    .createHmac("sha256", secret)
+    .update(`${timestamp}.${rawBody}`)
+    .digest("hex");
+  const a = Buffer.from(signature);
+  const b = Buffer.from(expected);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
 // Recherche profonde d'une chaîne sous une des clés données.
@@ -45,7 +45,6 @@ function findStringByKeys(obj: unknown, keys: string[]): string | null {
   return null;
 }
 
-// Recherche profonde d'un nombre sous une des clés données.
 function findNumberByKeys(obj: unknown, keys: string[]): number | null {
   if (Array.isArray(obj)) {
     for (const item of obj) {
@@ -69,103 +68,77 @@ function findNumberByKeys(obj: unknown, keys: string[]): number | null {
   return null;
 }
 
-// Notre référence est un uuid de 24 caractères hexadécimaux.
-const REF_PATTERN = /^[a-f0-9]{24}$/i;
-function findStringByValue(obj: unknown, value: string): boolean {
-  if (typeof obj === "string") return obj === value;
-  if (Array.isArray(obj)) return obj.some((item) => findStringByValue(item, value));
-  if (obj && typeof obj === "object") {
-    for (const item of Object.values(obj)) {
-      if (findStringByValue(item, value)) return true;
-    }
-  }
-  return false;
+function findSessionIdInPayload(payload: unknown): string | null {
+  return findStringByKeys(payload, ["session_id"]);
 }
 
-function secretMatches(req: Request, payload: Record<string, unknown>): boolean {
-  const secret = process.env.SASPAY_WEBHOOK_SECRET ?? process.env.SASPAY_SECRET;
-  if (!secret) return true; // pas de secret configuré → on accepte
-  if (req.headers.get("x-webhook-secret") === secret) return true;
-  if (new URL(req.url).searchParams.get("secret") === secret) return true;
-  return findStringByValue(payload, secret); // le payload peut contenir le secret
+function findCheckoutSessionIdInPayload(payload: unknown): string | null {
+  return findStringByKeys(payload, ["checkout_session", "checkout_session_id", "checkout_id"]);
 }
 
-function findStringByPattern(obj: unknown, pattern: RegExp): string | null {
-  if (typeof obj === "string") return pattern.test(obj) ? obj.toLowerCase() : null;
-  if (Array.isArray(obj)) {
-    for (const item of obj) {
-      const found = findStringByPattern(item, pattern);
-      if (found) return found;
-    }
-    return null;
-  }
-  if (obj && typeof obj === "object") {
-    for (const v of Object.values(obj)) {
-      const found = findStringByPattern(v, pattern);
-      if (found) return found;
-    }
-  }
-  return null;
+const AMOUNT_KEYS = ["amount", "montant", "total", "net_amount", "charged"];
+
+function findAmountInPayload(payload: unknown): number | null {
+  return findNumberByKeys(payload, AMOUNT_KEYS);
 }
 
-function findRefInPayload(payload: Record<string, unknown>): string | null {
-  const explicit = findStringByKeys(payload, [
-    "custom_data",
-    "metadata",
-    "order_id",
-    "client_ref",
-    "external_id",
-    "transaction_ref",
-  ]);
-  if (explicit && REF_PATTERN.test(explicit)) return explicit.toLowerCase();
-  return findStringByPattern(payload, REF_PATTERN);
+function isTransactionSuccessEvent(payload: { event?: string }): boolean {
+  const event = payload.event ?? "";
+  if (event === "transaction.success") return true;
+  if (event) return false; // autres events (failed, cancelled, test…) → rien à confirmer
+  return true; // pas d'event fourni → on tente la confirmation
 }
 
-// Statuts qui déclenchent la confirmation ; sans statut, on tente la confirmation.
-const SUCCESS_VALUES = new Set([
-  "success",
-  "successful",
-  "paid",
-  "completed",
-  "complete",
-  "approved",
-  "succeeded",
-  "true",
-  "1",
-  "done",
-  "ok",
-]);
-
-function isSuccessful(payload: Record<string, unknown>): boolean {
-  const status = findStringByKeys(payload, [
-    "status",
-    "state",
-    "result",
-    "payment_status",
-    "transaction_status",
-  ]);
-  if (status == null) return true;
-  return SUCCESS_VALUES.has(status.toLowerCase());
-}
-
-// Saspay peut confirmer par notre référence (si le payload la contient)
-// ou par montant (le plus ancien paiement en attente de ce plan).
 export async function POST(req: Request) {
-  const payload = await readPayload(req);
-  console.log("[webhook saspay] payload:", JSON.stringify(payload).slice(0, 2000));
+  const rawBody = await req.text();
+  let payload: { event?: string; data?: Record<string, unknown> } = {};
+  try {
+    payload = JSON.parse(rawBody) as { event?: string; data?: Record<string, unknown> };
+  } catch {
+    console.error("[webhook saspay] corps non-JSON ignoré");
+    return NextResponse.json({ ok: true, ignored: "corps non-JSON" });
+  }
+  console.log("[webhook saspay] event:", payload.event ?? "?", "corps:", rawBody.slice(0, 1500));
 
-  if (!secretMatches(req, payload)) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  if (!signatureValide(rawBody, req.headers)) {
+    return NextResponse.json({ error: "signature invalide" }, { status: 403 });
   }
 
-  if (!isSuccessful(payload)) {
-    console.log("[webhook saspay] statut non-final — ignoré");
-    return NextResponse.json({ ok: true, ignored: "statut non réussi" });
+  if (!isTransactionSuccessEvent(payload)) {
+    return NextResponse.json({ ok: true, ignored: `event ${payload.event ?? "inconnu"}` });
   }
 
   const store = getStore();
 
-  const ref = findRefInPayload(payload);
+  // 1) Le payload contient la session liée (metadata echo) → confirmation précise.
+  const sessionId = findSessionIdInPayload(payload);
+  if (sessionId) {
+    const pendings = await store.getPendingPaymentsBySession(sessionId);
+    if (pendings.length > 0) {
+      const p = pendings[0];
+      await store.markPaid(p.session_id, p.plan, p.ref);
+      return NextResponse.json({ ok: true, mode: "metadata" });
+    }
+  }
+
+  // 2) Vérification directe côté gateway des sessions de checkout en attente.
+  if (saspayApiDisponible) {
+    const checkoutId = findCheckoutSessionIdInPayload(payload);
+    const candidates = checkoutId
+      ? (await store.getAllPendingPayments(20)).filter((p) => p.saspaySessionId === checkoutId)
+      : await store.getAllPendingPayments(10);
+    for (const p of candidates) {
+      if (!p.saspaySessionId) continue;
+      const statut = await statutCheckout(p.saspaySessionId);
+      if (statut === "PAID") {
+        await store.markPaid(p.session_id, p.plan, p.ref);
+        return NextResponse.json({ ok: true, mode: "verification_api" });
+      }
+    }
+  }
+
+  // 3) Dernier recours sans API : référence interne ou montant (ancien flux statique).
+  const ref = findStringByKeys(payload, ["transaction_ref"]);
   if (ref) {
     const pending = await store.getPendingPayment(ref);
     if (pending) {
@@ -173,22 +146,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, mode: "reference" });
     }
   }
-
-  const amount = findNumberByKeys(payload, ["amount", "montant", "total", "prix", "price", "value"]);
-  if (amount != null) {
-    const plan = planByAmount(amount);
-    if (plan) {
-      const oldest = await store.getOldestPendingPayment(plan);
-      if (oldest) {
-        await store.markPaid(oldest.session_id, oldest.plan, oldest.ref);
-        console.log("[webhook saspay] confirmé par montant:", plan);
-        return NextResponse.json({ ok: true, mode: "montant", plan });
-      }
-      return NextResponse.json({ ok: true, ignored: "aucun paiement en attente pour ce plan" });
+  const plan = planByAmount(findAmountInPayload(payload) ?? -1);
+  if (plan) {
+    const oldest = await store.getOldestPendingPayment(plan);
+    if (oldest) {
+      await store.markPaid(oldest.session_id, oldest.plan, oldest.ref);
+      return NextResponse.json({ ok: true, mode: "montant", plan });
     }
+    return NextResponse.json({ ok: true, ignored: "aucun paiement en attente pour ce plan" });
   }
 
-  return NextResponse.json({ ok: true, ignored: "payload non reconnu" });
+  return NextResponse.json({ ok: true, ignored: "payload non lié" });
 }
 
 // Permet de vérifier l'URL du webhook depuis le navigateur.

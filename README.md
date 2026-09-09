@@ -26,17 +26,21 @@ Copie `.env.example` vers `.env.local` pour la configuration complète.
 
 Sans ces variables, l'app reste en mode démo (personnages du JSON, sessions non persistées).
 
-## Configuration Saspay (liens de paiement)
+## Configuration Saspay (API officielle)
 
-L'intégration repose sur des **liens Saspay** générés une fois pour chaque plan :
+L'intégration utilise l'**API Saspay** (checkout hébergé) — voir docs.saspay.me :
 
-1. Dans ton dashboard Saspay, crée 3 liens de paiement :
-   - Standard — **500 FCFA**
-   - Premium — **1000 FCFA**
-   - Pack 3 révélations — **1200 FCFA**
-2. Colle-les dans `.env.local` :
-   - `SASPAY_LINK_STANDARD`, `SASPAY_LINK_PREMIUM`, `SASPAY_LINK_PACK`
-3. Définis `NEXT_PUBLIC_SITE_URL` (ex. `https://ta-reincarnation.com`) pour que les liens de partage pointent vers ton domaine.
+1. Dans `app.saspay.me` → section **Développeur**, crée une clé API secrète (`sk_live_...` en production, `sk_test_...` en test) avec le scope `PAYIN` ou `BOTH`.
+2. Renseigne dans les variables d'environnement :
+   - `SASPAY_API_SECRET` — ta clé secrète
+   - `SASPAY_WEBHOOK_SECRET` — le secret de signature du webhook (affiché une seule fois à la création du webhook)
+3. Dans le dashboard, crée un **webhook** pointant vers `https://TON-DOMAIN/api/paiement/webhook`, abonné à l'event **`transaction.success`**.
+4. **Migration Supabase** (une seule fois) : exécute dans le SQL Editor :
+   `alter table payments add column if not exists saspay_session_id text;`
+
+À la création du paiement, l'app envoie `return_url` (redirection automatique du client vers la fiche débloquée 3 s après un paiement réussi) et `metadata` (session_id lié au paiement).
+
+**Fallback** : sans `SASPAY_API_SECRET`, l'app utilise des liens de paiement statiques (`SASPAY_LINK_STANDARD`, `SASPAY_LINK_PREMIUM`, `SASPAY_LINK_PACK`) avec détection automatique du paiement (polling) et webhook par montant.
 
 ### Fonctionnement du flux paiement
 

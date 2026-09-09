@@ -25,6 +25,7 @@ export interface PendingPayment {
 
 export interface PendingPaymentWithRef extends PendingPayment {
   ref: string;
+  saspaySessionId: string | null;
 }
 
 export interface Store {
@@ -33,9 +34,11 @@ export interface Store {
   createSession(input: NewSession): Promise<QuizSession>;
   getSession(id: string): Promise<QuizSession | null>;
   markPaid(id: string, plan: PlanId, ref: string | null): Promise<QuizSession | null>;
-  createPendingPayment(sessionId: string, plan: PlanId, ref: string): Promise<void>;
+  createPendingPayment(sessionId: string, plan: PlanId, ref: string, saspaySessionId?: string | null): Promise<void>;
   getPendingPayment(ref: string): Promise<PendingPayment | null>;
   getOldestPendingPayment(plan: PlanId): Promise<PendingPaymentWithRef | null>;
+  getPendingPaymentsBySession(sessionId: string): Promise<PendingPaymentWithRef[]>;
+  getAllPendingPayments(limit?: number): Promise<PendingPaymentWithRef[]>;
   consumePackCredit(sourceId: string): Promise<boolean>;
 }
 
@@ -45,7 +48,10 @@ const AMOUNTS: Record<PlanId, number> = { standard: 200, premium: 500, pack: 100
 
 // Mode démo (sans Supabase) : les sessions vivent en mémoire du process Node.
 function memoryStore(): Store {
-  type MemState = { sessions: Map<string, QuizSession>; pending: Map<string, PendingPayment> };
+  type MemState = {
+    sessions: Map<string, QuizSession>;
+    pending: Map<string, { session_id: string; plan: PlanId; saspaySessionId: string | null }>;
+  };
   const g = globalThis as { __triMemory?: MemState };
   g.__triMemory ??= { sessions: new Map(), pending: new Map() };
   const sessions = g.__triMemory.sessions;
@@ -85,8 +91,8 @@ function memoryStore(): Store {
       if (plan === "pack") s.pack_credits = (s.pack_credits ?? 0) + 2;
       return s;
     },
-    async createPendingPayment(sessionId, plan, ref) {
-      pending.set(ref, { session_id: sessionId, plan });
+    async createPendingPayment(sessionId, plan, ref, saspaySessionId) {
+      pending.set(ref, { session_id: sessionId, plan, saspaySessionId: saspaySessionId ?? null });
     },
     async getPendingPayment(ref) {
       return pending.get(ref) ?? null;
@@ -96,6 +102,23 @@ function memoryStore(): Store {
         if (entry.plan === plan) return { ...entry, ref };
       }
       return null;
+    },
+    async getPendingPaymentsBySession(sessionId) {
+      const result: PendingPaymentWithRef[] = [];
+      for (const [ref, entry] of pending) {
+        if (entry.session_id === sessionId) {
+          result.push({ session_id: entry.session_id, plan: entry.plan, ref, saspaySessionId: entry.saspaySessionId });
+        }
+      }
+      return result;
+    },
+    async getAllPendingPayments(limit = 10) {
+      const result: PendingPaymentWithRef[] = [];
+      for (const [ref, entry] of pending) {
+        if (result.length >= limit) break;
+        result.push({ session_id: entry.session_id, plan: entry.plan, ref, saspaySessionId: entry.saspaySessionId });
+      }
+      return result;
     },
     async consumePackCredit(sourceId) {
       const s = sessions.get(sourceId);
@@ -177,7 +200,12 @@ function supabaseStore(client: SupabaseClient): Store {
     return data as unknown as QuizSession;
   };
 
-  const createPendingPayment = async (sessionId: string, plan: PlanId, ref: string): Promise<void> => {
+  const createPendingPayment = async (
+    sessionId: string,
+    plan: PlanId,
+    ref: string,
+    saspaySessionId?: string | null
+  ): Promise<void> => {
     const { error } = await client.from("payments").insert({
       session_id: sessionId,
       provider: "saspay",
@@ -186,6 +214,7 @@ function supabaseStore(client: SupabaseClient): Store {
       currency: "XOF",
       status: "pending",
       transaction_ref: ref,
+      saspay_session_id: saspaySessionId ?? null,
     });
     if (error) throw new Error(error.message);
   };
@@ -204,7 +233,7 @@ function supabaseStore(client: SupabaseClient): Store {
   const getOldestPendingPayment = async (plan: PlanId): Promise<PendingPaymentWithRef | null> => {
     const { data } = await client
       .from("payments")
-      .select("session_id, plan, transaction_ref")
+      .select("session_id, plan, transaction_ref, saspay_session_id")
       .eq("status", "pending")
       .eq("plan", plan)
       .order("created_at", { ascending: true })
@@ -215,7 +244,39 @@ function supabaseStore(client: SupabaseClient): Store {
       session_id: data.session_id as string,
       plan: data.plan as PlanId,
       ref: data.transaction_ref as string,
+      saspaySessionId: (data.saspay_session_id as string | null) ?? null,
     };
+  };
+
+  const getPendingPaymentsBySession = async (sessionId: string): Promise<PendingPaymentWithRef[]> => {
+    const { data } = await client
+      .from("payments")
+      .select("session_id, plan, transaction_ref, saspay_session_id")
+      .eq("status", "pending")
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: false })
+      .limit(10);
+    return (data ?? []).map((row) => ({
+      session_id: row.session_id as string,
+      plan: row.plan as PlanId,
+      ref: row.transaction_ref as string,
+      saspaySessionId: (row.saspay_session_id as string | null) ?? null,
+    }));
+  };
+
+  const getAllPendingPayments = async (limit = 10): Promise<PendingPaymentWithRef[]> => {
+    const { data } = await client
+      .from("payments")
+      .select("session_id, plan, transaction_ref, saspay_session_id")
+      .eq("status", "pending")
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    return (data ?? []).map((row) => ({
+      session_id: row.session_id as string,
+      plan: row.plan as PlanId,
+      ref: row.transaction_ref as string,
+      saspaySessionId: (row.saspay_session_id as string | null) ?? null,
+    }));
   };
 
   const consumePackCredit = async (sourceId: string): Promise<boolean> => {
@@ -238,6 +299,8 @@ function supabaseStore(client: SupabaseClient): Store {
     createPendingPayment,
     getPendingPayment,
     getOldestPendingPayment,
+    getPendingPaymentsBySession,
+    getAllPendingPayments,
     consumePackCredit,
   };
 }

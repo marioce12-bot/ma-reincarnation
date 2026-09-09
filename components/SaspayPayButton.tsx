@@ -29,8 +29,6 @@ export default function SaspayPayButton({
   async function pay() {
     setError(null);
     setCheckHint(null);
-    // Ouvrir l'onglet immédiatement (synchronique) pour éviter les bloqueurs de popup.
-    const tab = window.open("about:blank");
     setPhase("starting");
     try {
       const res = await fetch("/api/paiement/demarrer", {
@@ -38,15 +36,25 @@ export default function SaspayPayButton({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ session_id: sessionId, plan }),
       });
-      const data = (await res.json().catch(() => null)) as { url?: string; error?: string } | null;
+      const data = (await res
+        .json()
+        .catch(() => null)) as { url?: string; mode?: "api" | "lien"; error?: string } | null;
       if (!res.ok || !data?.url) throw new Error(data?.error ?? "Paiement indisponible.");
+
+      if (data.mode === "api") {
+        // Redirection native : Saspay renvoie l'utilisateur vers la fiche débloquée.
+        window.location.href = data.url;
+        return;
+      }
+
+      // Mode lien statique : nouvel onglet + détection automatique du paiement.
+      const tab = window.open("about:blank");
       if (tab) tab.location.href = data.url;
       else window.location.href = data.url;
       setPhase("waiting");
       stopRef.current = false;
       void pollUntilPaid();
     } catch (e) {
-      tab?.close();
       setError(e instanceof Error ? e.message : "Erreur inconnue.");
       setPhase("idle");
     }
